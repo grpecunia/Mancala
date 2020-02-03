@@ -2,7 +2,9 @@
 *** GENERAL
 **********************************************/
 
-
+canvas {
+    border: 1px solid red;
+}
 
 body {
     /* background-image: url(/background.jpg); */
@@ -43,18 +45,21 @@ button {
 }
 
 button:hover {
-    background-color: #4CAF50;
+    background-color: rgb(230, 185, 39);
     color: white;
 }
 
 #start-button {
-    height:34px;
     margin:0 auto;
-    margin-right:10px;
     float: center;
+    border-radius: 12px;
+    font-size: 24px;
+    padding: 20px 32px;
 }
 
 header div {
+    display: grid;
+    align-items: center;
     justify-content: center;
 }
 

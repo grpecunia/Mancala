@@ -7,8 +7,8 @@
 const canvas = document.querySelector('#canvas'); //Get the canvas
 var img = new Image(); //load an image element
 
-canvas.width = 800
-canvas.height = 500
+canvas.width = 1100
+canvas.height = 600
 
 // document.querySelector('#start-button').click();
 
@@ -19,7 +19,7 @@ function startGame(){
     img.onload = function() {  //Load the board for the first time 
        ctx.drawImage(img, board.x, board.y, board.width, board.height); 
     }
-    img.src = "assets/board2.png";
+    img.src = "assets/mancala.png";
   
     window.requestAnimationFrame(animate) //Starts the animation infinite loop
   }
@@ -30,10 +30,10 @@ function startGame(){
   }
 
   let board = {
-    x: 140,
-    y: 200,
-    width: 500,
-    height: 153
+    x: 100,
+    y: 100,
+    width: 1000,
+    height: 300
   };
 
   function drawBoard() {
