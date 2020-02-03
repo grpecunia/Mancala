@@ -9,13 +9,8 @@
 const canvas = document.querySelector('#canvas'); //Get the canvas
 var img = new Image(); //load an image element
 
-<<<<<<< HEAD
 canvas.width = window.innerWidth - 15; //MAC
 canvas.height = window.innerHeight - 20; //MAC
-=======
-canvas.width = 900;
-canvas.height = 500;
->>>>>>> 8b61f752c54474bba336171b5e749f7bc7c71304
 
 document.querySelector('#start-button').click();
 
