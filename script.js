@@ -7,8 +7,8 @@
 const canvas = document.querySelector('#canvas'); //Get the canvas
 var img = new Image(); //load an image element
 
-canvas.width = 1000
-canvas.height = 600
+canvas.width = 800
+canvas.height = 500
 
 // document.querySelector('#start-button').click();
 
@@ -30,8 +30,8 @@ function startGame(){
   }
 
   let board = {
-    x: canvas.width /2 - 200,
-    y: 0,
+    x: 140,
+    y: 200,
     width: 500,
     height: 153
   };

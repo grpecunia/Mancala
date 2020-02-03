@@ -23,15 +23,18 @@ h1 {
     text-align: center;
 }
 
-.board {
+/* .board {
     background-image: url(assets/board2.png);
     background-repeat: no-repeat;
     background-position: center;
-}
+} */
 
 .rules {
     margin: 0;
-    padding: 100px;
+    padding-top: 50px;
+    text-align: center;
+    text-decoration: none;
+    list-style: none;
 }
 
 button {
@@ -53,4 +56,13 @@ button:hover {
 
 header div {
     justify-content: center;
+}
+
+canvas {
+    border: 1px solid red;
+    position: absolute;
+    top:50px;
+    bottom: 0;
+    left: 150px;
+    right: 0;
 }
