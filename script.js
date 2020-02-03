@@ -7,8 +7,8 @@
 const canvas = document.querySelector('#canvas'); //Get the canvas
 var img = new Image(); //load an image element
 
-canvas.width = 1100
-canvas.height = 600
+canvas.width = 800
+canvas.height = 500
 
 // document.querySelector('#start-button').click();
 
