@@ -1,0 +1,20 @@
+/**********************************************
+*** GENERAL
+**********************************************/
+
+
+
+body {
+    /* background-image: url(/background.jpg); */
+    background-color: green;
+    background-size: cover;
+    background-position: center;
+    font-family: OpenSans;
+    font-weight: 300;
+    position: relative;
+    color: #ffffff;
+}
+
+h1 {
+    text-align: center;
+}
