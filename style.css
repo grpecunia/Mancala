@@ -18,3 +18,15 @@ body {
 h1 {
     text-align: center;
 }
+
+.board {
+    background-image: url(assets/board2.png);
+    background-repeat: no-repeat;
+    height: 200px;
+    background-position: center;
+}
+
+.rules {
+    margin: 0;
+    padding: 100px;
+}
