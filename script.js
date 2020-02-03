@@ -7,8 +7,8 @@
 const canvas = document.querySelector('#canvas'); //Get the canvas
 var img = new Image(); //load an image element
 
-canvas.width = 800
-canvas.height = 500
+canvas.width = window.innerWidth - 15;
+canvas.height = window.innerHeight - 20;
 
 // document.querySelector('#start-button').click();
 
@@ -24,28 +24,33 @@ function startGame(){
     window.requestAnimationFrame(animate) //Starts the animation infinite loop
   }
 
+let mancalaBoard = [
+  [0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0]
+];
+
+var activePlayer = 0;
+
   function drawBoard() {
     ctx.fillStyle = 'green'
     ctx.fillRect(0,0,canvas.width, canvas.height) //draws the green grass 
   }
 
   let board = {
-    x: 100,
-    y: 100,
+    x: canvas.width / 2 - 500,
+    y: canvas.height / 2 - 150,
     width: 1000,
     height: 300
   };
 
   function drawBoard() {
     ctx.drawImage(img, board.x, board.y, board.width, board.height); //draws the board depending on the coords in the obj above 
-//     ctx.font = "32px OpenSans";
-//     ctx.fillText(`Gameplay - 1. The game begins with one player picking up all of the pieces in any one of the pockets on his/her side.
-// 2. Moving counter-clockwise, the player deposits one of the stones in each pocket until the stones run out.
-// 3. If you run into your own Mancala (store), deposit one piece in it. If you run into your opponent's Mancala, skip it and
-//  continue moving to the next pocket.
-// 4. If the last piece you drop is in your own Mancala, you take another turn.
-// 5. If the last piece you drop is in an empty pocket on your side, you capture that piece and any pieces in the pocket directly
-// opposite.`, 200, 500);
+    mancalaBoard = [[4, 4, 4, 4, 4, 4, 0], [4, 4, 4, 4, 4, 4, 0]]
+
+  }
+
+  function playerMove() {
+      
   }
 
   function animate(){
