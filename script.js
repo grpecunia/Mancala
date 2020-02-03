@@ -68,6 +68,54 @@ var activePlayer = 0;
     //   }
   }
 
+  // function drawSquares() {
+  // ctx.rect(180, 185, 75, 100);
+  // ctx.rect(275, 185, 75, 100);
+  // ctx.rect(370, 185, 75, 100);
+  // ctx.rect(470, 185, 75, 100);
+  // ctx.rect(560, 185, 75, 100);
+  // ctx.rect(650, 185, 75, 100);
+  // ctx.rect(185, 315, 75, 100);
+  // ctx.rect(275, 315, 75, 100);
+  // ctx.rect(365, 315, 75, 100);
+  // ctx.rect(465, 315, 75, 100);
+  // ctx.rect(555, 315, 75, 100);
+  // ctx.rect(650, 315, 75, 100);
+  // ctx.rect(85, 190, 80, 220);//mancala 1 location
+  // ctx.rect(740, 190, 80, 220);// mancala 2 location
+  // ctx.stroke();
+  // }
+
+  document.onclick = boxClick
+
+  function boxClick(e) {
+    if (e.x >= 180 && e.x <= 255 && e.y >= 185 && e.y <= 285)
+    console.log('you clicked box12!');
+    if (e.x >= 275 && e.x <= 350 && e.y >= 185 && e.y <= 285)
+    console.log('you clicked box11!');
+    if (e.x >= 370 && e.x <= 445 && e.y >= 185 && e.y <= 285)
+    console.log('you clicked box10!');
+    if (e.x >= 470 && e.x <= 545 && e.y >= 185 && e.y <= 285)
+    console.log('you clicked box9!');
+    if (e.x >= 560 && e.x <= 635 && e.y >= 185 && e.y <= 285)
+    console.log('you clicked box8!');
+    if (e.x >= 650 && e.x <= 725 && e.y >= 185 && e.y <= 285)
+    console.log('you clicked box7!');
+    if (e.x >= 185 && e.x <= 260 && e.y >= 315 && e.y <= 415)
+    console.log('you clicked box0!');
+    if (e.x >= 275 && e.x <= 350 && e.y >= 315 && e.y <= 415)
+    console.log('you clicked box1!');
+    if (e.x >= 365 && e.x <= 440 && e.y >= 315 && e.y <= 415)
+    console.log('you clicked box2!');
+    if (e.x >= 465 && e.x <= 540 && e.y >= 315 && e.y <= 415)
+    console.log('you clicked box3!');
+    if (e.x >= 555 && e.x <= 630 && e.y >= 315 && e.y <= 415)
+    console.log('you clicked box4!');
+    if (e.x >= 650 && e.x <= 725 && e.y >= 315 && e.y <= 415)
+    console.log('you clicked box5!');
+    }
+
+
 
   function animate(){
     let loop = window.requestAnimationFrame(animate) //continues the loop
