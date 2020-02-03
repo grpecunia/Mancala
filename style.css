@@ -15,6 +15,10 @@ body {
     color: #ffffff;
 }
 
+header #start-b {
+    align-content: center;
+}
+
 h1 {
     text-align: center;
 }
@@ -22,11 +26,31 @@ h1 {
 .board {
     background-image: url(assets/board2.png);
     background-repeat: no-repeat;
-    height: 200px;
     background-position: center;
 }
 
 .rules {
     margin: 0;
     padding: 100px;
+}
+
+button {
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+button:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#start-button {
+    height:34px;
+    margin:0 auto;
+    margin-right:10px;
+    float: center;
+}
+
+header div {
+    justify-content: center;
 }
