@@ -2,13 +2,14 @@
       this.remove()  //removes start button
       document.querySelector("body > div").remove()
       startGame() //calls startGame
+    //   grab();// function that grabs the whole
     }
 
 const canvas = document.querySelector('#canvas'); //Get the canvas
 var img = new Image(); //load an image element
 
-canvas.width = window.innerWidth - 15;
-canvas.height = window.innerHeight - 20;
+canvas.width = window.innerWidth - 15; //MAC
+canvas.height = window.innerHeight - 20; //MAC
 
 // document.querySelector('#start-button').click();
 
@@ -28,13 +29,9 @@ let mancalaBoard = [
   [0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0]
 ];
+console.log(mancalaBoard);
 
 var activePlayer = 0;
-
-  function drawBoard() {
-    ctx.fillStyle = 'green'
-    ctx.fillRect(0,0,canvas.width, canvas.height) //draws the green grass 
-  }
 
   let board = {
     x: canvas.width / 2 - 500,
@@ -45,17 +42,31 @@ var activePlayer = 0;
 
   function drawBoard() {
     ctx.drawImage(img, board.x, board.y, board.width, board.height); //draws the board depending on the coords in the obj above 
-    mancalaBoard = [[4, 4, 4, 4, 4, 4, 0], [4, 4, 4, 4, 4, 4, 0]]
+    mancalaBoard = [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0]
 
   }
 
-  function playerMove() {
-      
+  function grab (i) {
+      document.onclick = function (e) {
+          
+      }
+      console.log(mancalaBoard)
+      mancalaBoard[i] = 0
+      mancalaBoard[i+1]++
+      mancalaBoard[i+2]++
+      mancalaBoard[i+3]++
+      mancalaBoard[i+4]++
+      console.log(mancalaBoard, i)
+    //   document.onclick = function (e) {
+    //       console.log(e)
+    //   }
   }
+
 
   function animate(){
     let loop = window.requestAnimationFrame(animate) //continues the loop
     
     ctx.clearRect(0,0,canvas.width, canvas.height) //clears the whole canvas, the car, the board everything in the canvas
     drawBoard()  //redraws the board over and over and over again
+    
   }
