@@ -1,6 +1,7 @@
   document.querySelector('#start-button').onclick = function() {
       this.remove()  //removes start button
       document.querySelector("body > div").remove()
+      document.querySelector("header > h1").remove()
       startGame() //calls startGame
     //   grab();// function that grabs the whole
     }
@@ -8,10 +9,15 @@
 const canvas = document.querySelector('#canvas'); //Get the canvas
 var img = new Image(); //load an image element
 
+<<<<<<< HEAD
 canvas.width = window.innerWidth - 15; //MAC
 canvas.height = window.innerHeight - 20; //MAC
+=======
+canvas.width = 900;
+canvas.height = 500;
+>>>>>>> 8b61f752c54474bba336171b5e749f7bc7c71304
 
-// document.querySelector('#start-button').click();
+document.querySelector('#start-button').click();
 
 const ctx = canvas.getContext('2d');
 
@@ -33,10 +39,15 @@ console.log(mancalaBoard);
 
 var activePlayer = 0;
 
+  function drawBoard() {
+    ctx.fillStyle = 'none';
+    ctx.fillRect(0,0,canvas.width, canvas.height) //draws the green grass 
+  }
+
   let board = {
-    x: canvas.width / 2 - 500,
-    y: canvas.height / 2 - 150,
-    width: 1000,
+    x: 75,
+    y: 150,
+    width: 750,
     height: 300
   };
 
@@ -68,5 +79,5 @@ var activePlayer = 0;
     
     ctx.clearRect(0,0,canvas.width, canvas.height) //clears the whole canvas, the car, the board everything in the canvas
     drawBoard()  //redraws the board over and over and over again
-    
+    // drawSquares()
   }
