@@ -13,7 +13,9 @@ body {
     color: #ffffff;
     text-align: center;
 }
-
+.disableMe {
+    pointer-events: none;
+}
 body>div.container>div {
     background-color: rgba(255, 255, 255, 0.826);
 }
