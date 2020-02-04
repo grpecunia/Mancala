@@ -2,20 +2,29 @@
 *** GENERAL
 **********************************************/
 
-canvas {
-    border: 1px solid red;
-}
+
 
 body {
-    /* background-image: url(/background.jpg); */
+    background-image: url(/background.jpg);
     background-color: green;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     font-family: OpenSans;
     font-weight: 300;
     position: relative;
     color: #ffffff;
     text-align: center;
+}
+
+body>div.container>div {
+    background-color: rgba(255, 255, 255, 0.726);
+}
+
+body>header>div.rules {
+    background-color: rgba(255, 255, 255, 0.726);
+    margin-left: 50px;
+    margin-right: 50px;
+    padding-bottom: 20px;
 }
 
 header #start-b {
@@ -54,8 +63,8 @@ button:hover {
     margin:0 auto;
     float: center;
     border-radius: 12px;
-    font-size: 24px;
-    padding: 20px 32px;
+    font-size: 20px;
+    /* padding: 20px 32px; */
 }
 
 header div {
@@ -87,11 +96,15 @@ canvas {
 }
 
 .col {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     padding-bottom: 30px;
     padding-top: 30px;
     justify-content: justify;
     text-align: center;
+}
+
+.col-1{
+    border: outset;
 }
 
 #bucket-0, #bucket-1 {
@@ -99,10 +112,20 @@ canvas {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    height: 100px;
+    height: 150px;
+    margin-top: 5%;
 }
 
-ul {
+ol {
     text-align: -webkit-auto;
     padding-left: 75px;
+    padding-right: 75px;
+}
+
+#score-0, #score-1 {
+    border: none;
+}
+
+.active {
+    background-color: deepskyblue;
 }
