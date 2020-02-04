@@ -16,29 +16,70 @@ function init() {
 
 document.querySelector("#start-button").addEventListener('click', init)
 
-
 function move(loc) {
-    document.onclick = function(e) {
-        let stoneCount = mancalaBoard[Number(e.target.attributes.id.value)];
-        for (let i = Number(e.target.attributes.id.value); i <= (Number(e.target.attributes.id.value) + stoneCount); i++){
-
-            // console.log('>>>>',
-            //   mancalaBoard[i],
-            //   'e.target.val - ' + e.target.attributes.id.value,
-            //   stoneCount
-            // );
-            console.log("i: ", i);
-            console.log("index: ", Number(e.target.attributes.id.value));
-            console.log("stoneCount: ", stoneCount);
-            console.log("conditional: ", (Number(e.target.attributes.id.value) + stoneCount));
-            mancalaBoard[i]++
-        }
-        mancalaBoard[e.target.attributes.id.value] = 0;
+  document.onclick = function(e) {
+    let stoneCount = mancalaBoard[Number(e.target.attributes.id.value)];
+    let conditional = Number(e.target.attributes.id.value) + stoneCount;
+      for (
+        let i = Number(e.target.attributes.id.value); i <= Number(e.target.attributes.id.value) + stoneCount; i++) {
+        console.log("i: ", i);
+        console.log("index: ", Number(e.target.attributes.id.value));
+        console.log("stoneCount: ", stoneCount);
+        console.log(
+          "conditional: ",
+          Number(e.target.attributes.id.value) + stoneCount
+        );
+        mancalaBoard[i%14]++;
+      }
+    
+    mancalaBoard[e.target.attributes.id.value] = 0;
     //   console.log(e.target.attributes.id.value, stoneCount, mancalaBoard[e.target.attributes.id.value]);
-      updateMancala();
-      console.log(mancalaBoard);
-    };
+    updateMancala();
+    console.log(mancalaBoard);
+  };
 }
+
+// function move(loc) {
+//     document.onclick = function(e) {
+//         console.log(e)
+//         let stoneCount = mancalaBoard[Number(e.target.attributes.id.value)];
+//         let conditional = Number(e.target.attributes.id.value) + stoneCount;
+//             for (let i = Number(e.target.attributes.id.value); i <= conditional; i++) {
+//                 mancalaBoard[i%14]++
+//                 }
+//             } 
+//         mancalaBoard[e.target.attributes.id] = 0;
+//       updateMancala();  
+//     //   console.log(mancalaBoard);
+//     };
+
+// function move(loc) {
+//   document.onclick = function(e) {
+//     let stoneCount = mancalaBoard[Number(e.target.attributes.id.value)];
+//     let conditional = Number(e.target.attributes.id.value) + stoneCount;
+//     if (conditional <= 13) {
+//       for (
+//         let i = Number(e.target.attributes.id.value);
+//         i <= Number(e.target.attributes.id.value) + stoneCount;
+//         i++
+//       ) {
+//         console.log("i: ", i);
+//         console.log("index: ", Number(e.target.attributes.id.value));
+//         console.log("stoneCount: ", stoneCount);
+//         console.log(
+//           "conditional: ",
+//           Number(e.target.attributes.id.value) + stoneCount
+//         );
+//         mancalaBoard[i]++;
+//       }
+//     } else {
+//     }
+//     mancalaBoard[e.target.attributes.id.value] = 0;
+//     //   console.log(e.target.attributes.id.value, stoneCount, mancalaBoard[e.target.attributes.id.value]);
+//     updateMancala();
+//     console.log(mancalaBoard);
+//   };
+// }
 
 function updateMancala() {
     document.querySelector(
