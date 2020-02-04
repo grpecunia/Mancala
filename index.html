@@ -31,11 +31,11 @@
                             Settings
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Difficulty</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#difficulty">Difficulty</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Players</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#players">Players</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Stone Count</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#stones">Stone Count</a>
                         </div>
                     </li>
                 </ul>
@@ -44,6 +44,75 @@
                 </form>
             </div>
         </nav>
+
+        <!-- Modal Difficulty-->
+        <div class="modal fade" id="difficulty" role="dialog">
+            <div class="modal-dialog">
+        
+                <!-- Modal Difficulty content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Select the difficulty</h4>
+                    </div>
+                    <div class="modal-body">
+                        <button type="button" class="btn btn-outline-success">Easy</button>
+                        <hr>
+                        <button type="button" class="btn btn-outline-warning">Advanced</button>
+                        <hr>
+                        <button type="button" class="btn btn-outline-danger">Legendary</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+
+        <!-- Modal Players-->
+        <div class="modal fade" id="players" role="dialog">
+            <div class="modal-dialog">
+        
+                <!-- Modal Players content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Player Options</h4>
+                    </div>
+                    <div class="modal-body">
+                        <button type="button" class="btn btn-outline-success">Multi-Player</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+
+        <!-- Modal Stone Count-->
+        <div class="modal fade" id="stones" role="dialog">
+            <div class="modal-dialog">
+        
+                <!-- Modal Stone Count content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Stone Count</h4>
+                    </div>
+                    <div class="modal-body">
+                        <button type="button" class="btn btn-outline-success">+</button>
+                        <input type="text" value='4' class='stone-count'/>
+                        <button type="button" class="btn btn-outline-danger">-</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
 
         <div class='rules'>
             <h2>Game Play</h2>
@@ -71,23 +140,23 @@
             <div class="col">
                 <-- Player 1 plays in this direction <--
                 <div class="row">
-                    <div class="col-1" onclick="move();">0</div>
-                    <div class="col-1" onclick="move();">0</div>
-                    <div class="col-1" onclick="move()">0</div>
-                    <div class="col-1" onclick="move()">0</div>
-                    <div class="col-1" onclick="move()">0</div>
-                    <div class="col-1" onclick="move()">0</div>
+                    <div class="col-1" id='5' onclick="move();">0</div>
+                    <div class="col-1" id='4' onclick="move();">0</div>
+                    <div class="col-1" id='3' onclick="move()">0</div>
+                    <div class="col-1" id='2' onclick="move()">0</div>
+                    <div class="col-1" id='1' onclick="move()">0</div>
+                    <div class="col-1" id='0' onclick="move()">0</div>
                 </div>
 
                 
                
                 <div class="row">
-                    <div class="col-1" onclick="move()">0</div>
-                    <div class="col-1" onclick="move()">0</div>
-                    <div class="col-1" onclick="move()">0</div>
-                    <div class="col-1" onclick="move()">0</div>
-                    <div class="col-1" onclick="move()">0</div>
-                    <div class="col-1" onclick="move()">0</div>
+                    <div class="col-1" id='7' onclick="move()">0</div>
+                    <div class="col-1" id='8' onclick="move()">0</div>
+                    <div class="col-1" id='9' onclick="move()">0</div>
+                    <div class="col-1" id='10' onclick="move()">0</div>
+                    <div class="col-1" id='11' onclick="move()">0</div>
+                    <div class="col-1" id='12' onclick="move()">0</div>
                 </div>
                 --> Player 2 plays in this direction --> 
             </div>

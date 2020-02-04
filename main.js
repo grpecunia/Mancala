@@ -1,4 +1,4 @@
-var mancalaBoard, activePlayer, score;
+var mancalaBoard, activePlayer, score, stoneCount;
 
 function init() {
     mancalaBoard = [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0]
@@ -53,7 +53,21 @@ document.querySelector("#start-button").addEventListener('click', init)
 
 function move(loc) {
     document.onclick = function(e) {
-      console.log(e.target.innerHTML, e.target);
+    //   mancalaBoard[e.target.attributes.id.value] 
+      console.log(e.target.attributes.id.value);
+    //   e.target.innerHTML = 0
     };
 }
 
+
+//****   Functionality to increase and decrease Stone Count in the NavBar Modal  */
+document.querySelector("#stones > div > div > div.modal-body > button.btn.btn-outline-success").addEventListener('click', upStone)
+document.querySelector("#stones > div > div > div.modal-body > button.btn.btn-outline-danger").addEventListener('click', downStone)
+
+function upStone() {
+    document.querySelector("#stones > div > div > div.modal-body > input").value++;
+}
+
+function downStone() {
+    document.querySelector("#stones > div > div > div.modal-body > input").value--;
+}

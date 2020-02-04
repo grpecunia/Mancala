@@ -5,7 +5,7 @@
 
 
 body {
-    background-image: url(/background.jpg);
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/21/Mandel_zoom_00_mandelbrot_set.jpg');
     background-color: green;
     background-size: contain;
     background-position: center;
@@ -17,11 +17,11 @@ body {
 }
 
 body>div.container>div {
-    background-color: rgba(255, 255, 255, 0.726);
+    background-color: rgba(255, 255, 255, 0.826);
 }
 
 body>header>div.rules {
-    background-color: rgba(255, 255, 255, 0.726);
+    background-color: rgba(255, 255, 255, 0.926);
     margin-left: 50px;
     margin-right: 50px;
     padding-bottom: 20px;
@@ -127,5 +127,12 @@ ol {
 }
 
 .active {
-    background-color: deepskyblue;
+    background-color: #2571cd;
+}
+
+#stones>div>div>div.modal-body>input {
+    text-align: center;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
 }
