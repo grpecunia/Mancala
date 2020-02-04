@@ -2,8 +2,6 @@
 *** GENERAL
 **********************************************/
 
-
-
 body {
     background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/21/Mandel_zoom_00_mandelbrot_set.jpg');
     background-color: green;
@@ -122,7 +120,13 @@ ol {
     padding-right: 75px;
 }
 
-#score-0, #score-1 {
+#\36 {
+    border: none;
+    font-size: xx-large;
+    color: aliceblue;
+}
+
+#\31 3 {
     border: none;
     font-size: xx-large;
     color: aliceblue;
@@ -137,8 +141,4 @@ ol {
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
-}
-
-#score-0 #score-1 {
-    
 }

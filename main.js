@@ -19,7 +19,7 @@ document.querySelector("#start-button").addEventListener('click', init)
 function move(loc) {
     document.onclick = function(e) {
         let stoneCount = mancalaBoard[e.target.attributes.id.value];
-        for (let i = e.target.attributes.id.value; i <= e.target.attributes.id.value + stoneCount; i++){
+        for (let i = e.target.attributes.id.value; i <= (e.target.attributes.id.value + stoneCount); i++){
             mancalaBoard[i]++
             console.log(mancalaBoard[i]);
         }
@@ -48,7 +48,7 @@ function updateMancala() {
     document.querySelector(
       "body > div.container > div > div.col > div:nth-child(1) > div:nth-child(1)"
     ).innerHTML = mancalaBoard[5];
-    document.getElementById('6').innerHTML = mancalaBoard[6];
+    document.querySelector("#\\36 ").innerHTML = mancalaBoard[6];
     document.querySelector(
       "body > div.container > div > div.col > div:nth-child(2) > div:nth-child(1)"
     ).innerHTML = mancalaBoard[7];
@@ -67,7 +67,7 @@ function updateMancala() {
     document.querySelector(
       "body > div.container > div > div.col > div:nth-child(2) > div:nth-child(6)"
     ).innerHTML = mancalaBoard[12];
-    document.getElementById('13').innerHTML = mancalaBoard[13];
+    document.querySelector("#\\31 3").innerHTML = mancalaBoard[13];
 }
 
 
