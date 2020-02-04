@@ -9,6 +9,27 @@ function init() {
     document.querySelector(
       "body > div.container > div > div.col > div:nth-child(1)"
     ).classList.add('active')
+    updateMancala();
+    console.log("Start");
+}
+
+document.querySelector("#start-button").addEventListener('click', init)
+
+
+function move(loc) {
+    document.onclick = function(e) {
+        let stoneCount = mancalaBoard[e.target.attributes.id.value];
+        for (let i = e.target.attributes.id.value; i <= e.target.attributes.id.value + stoneCount; i++){
+            mancalaBoard[i]++
+            console.log(mancalaBoard[i]);
+        }
+        mancalaBoard[e.target.attributes.id.value] = 0;
+      console.log(e.target.attributes.id.value, stoneCount, mancalaBoard[e.target.attributes.id.value]);
+      updateMancala();
+    };
+}
+
+function updateMancala() {
     document.querySelector(
       "body > div.container > div > div.col > div:nth-child(1) > div:nth-child(6)"
     ).innerHTML = mancalaBoard[0];
@@ -27,6 +48,7 @@ function init() {
     document.querySelector(
       "body > div.container > div > div.col > div:nth-child(1) > div:nth-child(1)"
     ).innerHTML = mancalaBoard[5];
+    document.getElementById('6').innerHTML = mancalaBoard[6];
     document.querySelector(
       "body > div.container > div > div.col > div:nth-child(2) > div:nth-child(1)"
     ).innerHTML = mancalaBoard[7];
@@ -45,18 +67,7 @@ function init() {
     document.querySelector(
       "body > div.container > div > div.col > div:nth-child(2) > div:nth-child(6)"
     ).innerHTML = mancalaBoard[12];
-    console.log("Start");
-}
-
-document.querySelector("#start-button").addEventListener('click', init)
-
-
-function move(loc) {
-    document.onclick = function(e) {
-    //   mancalaBoard[e.target.attributes.id.value] 
-      console.log(e.target.attributes.id.value);
-    //   e.target.innerHTML = 0
-    };
+    document.getElementById('13').innerHTML = mancalaBoard[13];
 }
 
 

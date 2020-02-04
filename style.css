@@ -89,8 +89,8 @@ canvas {
 
 .row {
     border: 1px solid black;
-    padding-bottom: 30px;
-    padding-top: 30px;
+    padding-bottom: 25px;
+    padding-top: 25px;
     text-align: center;
     justify-content: space-evenly;
 }
@@ -113,7 +113,7 @@ canvas {
     background-size: contain;
     background-position: center;
     height: 150px;
-    margin-top: 5%;
+    margin-top: 6%;
 }
 
 ol {
@@ -124,6 +124,8 @@ ol {
 
 #score-0, #score-1 {
     border: none;
+    font-size: xx-large;
+    color: aliceblue;
 }
 
 .active {
@@ -135,4 +137,8 @@ ol {
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
+}
+
+#score-0 #score-1 {
+    
 }
