@@ -61,7 +61,7 @@ button:hover {
     color: white;
 }
 
-#start-button {
+#start-button #restart {
     margin:0 auto;
     float: center;
     color: orange;
@@ -133,4 +133,8 @@ ol {
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
+}
+
+#inst>div>div>div.modal-body>a {
+    text-align: center;
 }

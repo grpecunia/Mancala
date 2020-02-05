@@ -13,9 +13,8 @@ function init() {
   score = [mancalaBoard[6], mancalaBoard[13]];
   activePlayer = 0;
   document.querySelector("#start-button").remove();
-  document
-    .querySelector("body > div.container > div > div.col > div:nth-child(1)")
-    .classList.add("active");
+  document.querySelector("#navbarSupportedContent > form").innerHTML += `<button class='btn btn-outline-danger' id="restart">Clear Game</button>`;
+  document.querySelector("body > div.container > div > div.col > div:nth-child(1)").classList.add("active");
   updateMancala();
   console.log("Start");
   gameStart.play();
@@ -194,3 +193,12 @@ function checkBoard() {
             }, false)
   }
 }
+
+// *************************************************************************************** */
+//****   RESTART GAME FUNCTION  ********/
+
+function restart() {
+    window.location.reload();
+    init();
+}
+document.querySelector("#restart").addEventListener("click", restart);
