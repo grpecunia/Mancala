@@ -3,24 +3,24 @@
 **********************************************/
 
 body {
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/21/Mandel_zoom_00_mandelbrot_set.jpg');
-    background-color: green;
-    background-size: contain;
-    background-position: center;
+    background-image: url('assets/africanbg2.jpg');
+    background-size: auto;
+    background-repeat: no-repeat;
     font-family: OpenSans;
     font-weight: 300;
     position: relative;
     color: #ffffff;
     text-align: center;
+    margin: 0;
 }
 
 @font-face {
     font-family: "Assyrian";
-    src: url("assets/Assyrian.ttf");
+    src: url("assets/Assyrian3d.ttf");
     }
 
 .maintitle h1 {
-    color: white;
+    color: black;
     font-size: 6rem;
     text-align: center;
     font-family: "Assyrian";
@@ -33,24 +33,23 @@ body>div.container>div {
     background-color: rgba(255, 255, 255, 0.826);
 }
 
-body>header>div.rules {
+/* body>header>div.rules {
     background-color: rgba(255, 255, 255, 0.926);
     margin-left: 50px;
     margin-right: 50px;
-    padding-bottom: 20px;
-}
+} */
 
 header #start-b {
     align-content: center;
 }
 
-.rules {
+/* .rules {
     margin: 0;
     padding-top: 50px;
     text-align: center;
     text-decoration: none;
     list-style: none;
-}
+} */
 
 button {
     -webkit-transition-duration: 0.4s;

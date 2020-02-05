@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mancala</title>
+    <title>Mancala - A Strategy Game</title>
     <link rel="icon" type="image/png" href="assets/favicon.ico">
     <link rel='stylesheet' href='style.css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -15,7 +15,6 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <!-- <a class="navbar-brand" href="#">The Online Mancala Game</a> -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -25,10 +24,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="modal" data-target="#inst">Rules</a>
+                        <a class="nav-link" onclick="window.location.reload();">Restart</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" onclick="window.location.reload();">Restart</a>
+                        <a class="nav-link" data-toggle="modal" data-target="#inst">Rules</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -65,12 +64,13 @@
                             <li>The game begins with one player picking up all of the pieces in any one of the pockets on his/her side.</li>
                             <li>Moving counter-clockwise, the player deposits one of the stones in each pocket until the stones run out.
                             </li>
-                            <li>If you run into your own Mancala (store), deposit one piece in it. If you run into your opponent's Mancala,
+                            <li>If you run into your own Mancala (goal), deposit one piece in it. If you run into your opponent's Mancala,
                                 skip
                                 it and continue moving to the next pocket.</li>
                             <li>If the last piece you drop is in your own Mancala, you take another turn.</li>
                             <li>If the last piece you drop is in an empty pocket on your side, you capture that piece and any pieces in the
                                 pocket directly opposite.</li>
+                            <a href="https://www.youtube.com/watch?v=iSJk6CYsf6c" target="_blank">Still unclear?  Watch this short video.</a> 
                         </ol>
                     </div>
                 </div>
@@ -149,20 +149,6 @@
         </div>
         <div class='maintitle'><h1>Mancala</h1>
         </div>
-        <!-- <div class='rules'> -->
-            <!-- <h2>Game Play</h2>
-            <ol>
-                <li>The game begins with one player picking up all of the pieces in any one of the pockets on his/her side.</li>
-                <li>Moving counter-clockwise, the player deposits one of the stones in each pocket until the stones run out.
-                </li>
-                <li>If you run into your own Mancala (store), deposit one piece in it. If you run into your opponent's Mancala,
-                    skip
-                    it and continue moving to the next pocket.</li>
-                <li>If the last piece you drop is in your own Mancala, you take another turn.</li>
-                <li>If the last piece you drop is in an empty pocket on your side, you capture that piece and any pieces in the
-                    pocket directly opposite.</li>
-            </ol>
-        </div> -->
         <hr/>
     </header>
     

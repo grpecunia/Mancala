@@ -12,7 +12,6 @@ function init() {
   score = [mancalaBoard[6], mancalaBoard[13]];
   activePlayer = 0;
   document.querySelector("#start-button").remove();
-  document.querySelector("body > header > div.rules").remove();
   document
     .querySelector("body > div.container > div > div.col > div:nth-child(1)")
     .classList.add("active");
