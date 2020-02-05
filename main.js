@@ -30,7 +30,7 @@ var rockSound = new Audio('assets/rocksmove.wav');
 
 function move(loc) {
     document.querySelector("div.row.pit-"+activePlayer).onclick = function(e) {
-        console.log(e.target.id);
+        // console.log(e.target.id);
     let stoneCount = mancalaBoard[Number(e.target.id)];
     let conditional = Number(e.target.attributes.id.value) + stoneCount;
     let position;
@@ -65,13 +65,13 @@ function move(loc) {
       document.querySelector("div.row.pit-" + activePlayer).classList.add("active");
       
     } else {
-        console.log('sometingwong!!')
+        // console.log('sometingwong!!')
     }
     mancalaBoard[e.target.attributes.id.value] = 0;
     updateMancala();
     rockSound.play();
     checkButtons();
-    console.log("POST > Current Player is Player " + activePlayer);
+    // console.log("POST > Current Player is Player " + activePlayer);
   };
 }
 //********************************************************************************************* */
@@ -128,8 +128,10 @@ function updateMancala() {
     "body > div.container > div > div.col > div:nth-child(2) > button:nth-child(6)"
   ).innerHTML = mancalaBoard[12];
   document.querySelector("#\\31 3").innerText = mancalaBoard[13];
-//    checkButtons();
+  checkBoard()
 }
+
+
 /*************************************************************************************** */
 //****   Functionality to increase and decrease Stone Count in the NavBar Modal  ********/
 
@@ -153,8 +155,29 @@ function downStone() {
 // }
 
 /*************************************************************************************** */
-//****   Check if GAME is OVER  ********/
+//****   Check if GAME  Mancala board to make sure there are values in PITS  ********/
 
-// function checkBoard(){
-//     if (mancalaBoard[0])
-// }
+function checkBoard() {
+//   console.log(gamePlaying);
+  let sum1 = 0;
+  let sum2 = 0;
+  for (let i = 0; i <= 5; i++) {
+    sum1 += mancalaBoard[i];
+  }
+//   console.log(sum1);
+  for (let i = 7; i <= 12; i++) {
+    sum2 += mancalaBoard[i];
+  }
+//   console.log(sum2);
+//   console.log("the sum of side player 1 is - " + sum1);
+//   console.log("the sum of side player 2 is - " + sum2);
+  if (sum1 == 0 || sum2 == 0) {
+    let gamePlaying = false;
+    // console.log("One of the pit sides is empty");
+    // console.log(gamePlaying);
+    if (score[0] > score[1]) {
+        alert('Game Over - Player 2 WINS' )
+    }
+    alert('Game Over - Player 1 WINS' )
+  }
+}
