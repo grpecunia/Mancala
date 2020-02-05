@@ -184,9 +184,13 @@ function checkBoard() {
     // console.log(gamePlaying);
     if (score[0] > score[1]) {
         gameOver.play();
-        alert('Game Over - Player 2 WINS' )
+            gameOver.addEventListener('ended', function() {
+            alert('Game Over - Player 1 WINS' )
+            }, false)
     }
     gameOver.play();
-    alert('Game Over - Player 1 WINS' )
+    gameOver.addEventListener('ended', function() {
+            alert("Game Over - Player 1 WINS");
+            }, false)
   }
 }
