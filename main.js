@@ -1,12 +1,14 @@
 //*************************************************************************************** */
 //** Initial VARIABLE declarations */
 
-var mancalaBoard, activePlayer, score, stoneCount, conditional, gamePlaying, sC;
+var mancalaBoard, activePlayer, score, stoneCount, conditional, gamePlaying, sC, gamePlay, diff;
 
 //*************************************************************************************** */
 //** Initiation FUNCTION - Runs when 'START GAME' Button is clicked */
 
 function init() {
+  gamePlay = 0;
+  diff = 0;
   sC = document.querySelector("#stones > div > div > div.modal-body > input").value
   gamePlaying = true;
   mancalaBoard = [sC, sC, sC, sC, sC, sC, 0, sC, sC, sC, sC, sC, sC, 0];
@@ -156,10 +158,6 @@ function downStone() {
     .value--;
 }
 
-// function loadStoneCount() {
-
-// }
-
 /*************************************************************************************** */
 //****   Check if GAME  Mancala board to make sure there are values in PITS  ********/
 
@@ -202,3 +200,24 @@ function restart() {
     init();
 }
 document.querySelector("#restart").addEventListener("click", restart);
+
+/*************************************************************************************** */
+//****   Functionality to Change DIFFICULTY in the NavBar Modal  ********/
+
+document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-success").addEventListener("click", easy)
+
+function easy() {
+  diff = 0
+}
+
+document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-warning").addEventListener("click", advanced)
+
+function advanced() {
+  diff = 1
+}
+
+document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-danger").addEventListener("click", legendary)
+
+function legendary() {
+  diff = 2
+}
