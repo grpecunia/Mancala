@@ -89,7 +89,7 @@ header div {
 }
 
 #bucket-0, #bucket-1 {
-    background-image: url(/assets/bucket.png);
+    background-image: url(assets/bucket.png);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
