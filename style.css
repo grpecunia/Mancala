@@ -16,6 +16,11 @@ body {
 
 @font-face {
     font-family: "Assyrian";
+    src: url("assets/Assyrian.ttf");
+    }
+
+@font-face {
+    font-family: "Assyrian3d";
     src: url("assets/Assyrian3d.ttf");
     }
 
@@ -26,6 +31,10 @@ body {
     font-family: "Assyrian";
 }
 
+.col {
+    font-family: "Assyrian";
+    font-size: 1.2rem;
+}
 .disableMe {
     pointer-events: none;
 }
@@ -104,6 +113,8 @@ header div {
     background-position: center;
     height: 150px;
     margin-top: 6%;
+    font-family: "Assyrian";
+    font-size: 1.2rem;
 }
 
 ol {
