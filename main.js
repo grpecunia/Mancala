@@ -18,6 +18,7 @@ function init() {
     .classList.add("active");
   updateMancala();
   console.log("Start");
+  gameStart.play();
 }
 
 document.querySelector("#start-button").addEventListener("click", init); //START GAME onClick Event to init()
@@ -27,6 +28,9 @@ document.querySelector("#start-button").addEventListener("click", init); //START
 //** FUNCTION CENTRAL FOR BOARD MOVES */
 
 var rockSound = new Audio('assets/rocksmove.wav');
+var gameStart = new Audio('assets/startgame.wav')
+var gameOver = new Audio('assets/gameover.wav');
+
 
 function move(loc) {
     document.querySelector("div.row.pit-"+activePlayer).onclick = function(e) {

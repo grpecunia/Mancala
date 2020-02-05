@@ -13,6 +13,19 @@ body {
     color: #ffffff;
     text-align: center;
 }
+
+@font-face {
+    font-family: "Assyrian";
+    src: url("assets/Assyrian.ttf");
+    }
+
+.maintitle h1 {
+    color: white;
+    font-size: 6rem;
+    text-align: center;
+    font-family: "Assyrian";
+}
+
 .disableMe {
     pointer-events: none;
 }
@@ -29,10 +42,6 @@ body>header>div.rules {
 
 header #start-b {
     align-content: center;
-}
-
-h1 {
-    text-align: center;
 }
 
 .rules {
@@ -56,6 +65,7 @@ button:hover {
 #start-button {
     margin:0 auto;
     float: center;
+    color: orange;
     border-radius: 12px;
     font-size: 20px;
     /* padding: 20px 32px; */
