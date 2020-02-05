@@ -3,19 +3,67 @@
 
 var mancalaBoard, activePlayer, score, stoneCount, conditional, gamePlaying, sC, gamePlay, diff;
 
+
+/*************************************************************************************** */
+//****   Functionality to Change DIFFICULTY in the NavBar Modal  ********/
+
+var diff = 0;
+
+document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-success").addEventListener("click", easy)
+
+function easy() {
+  diff = 0;
+}
+
+document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-warning").addEventListener("click", advanced)
+
+function advanced() {
+  diff = 1;
+  document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-success").classList.remove('active')
+  document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-warning").classList.add('active')
+}
+
+document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-danger").addEventListener("click", legendary)
+
+function legendary() {
+  diff = 2;
+  document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-success").classList.remove('active')
+  document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-danger").classList.add('active')
+}
+
+/*************************************************************************************** */
+//****   Functionality to Change PLAYER SETTINGS in the NavBar Modal  ********/
+
+var gamePlay = 0;
+
+document.querySelector("#players > div > div > div.modal-body > button.btn.btn-outline-success").addEventListener("click", multi)
+
+function multi(){
+    gamePlay = 0
+    document.querySelector("#players > div > div > div.modal-body > button.btn.btn-outline-success").classList.add('active')
+    document.querySelector("#players > div > div > div.modal-body > button.btn.btn-outline-danger").classList.remove('active')
+}
+
+document.querySelector("#players > div > div > div.modal-body > button.btn.btn-outline-danger").addEventListener("click", comp)
+
+function comp() {
+    gamePlay = 1;
+    document.querySelector("#players > div > div > div.modal-body > button.btn.btn-outline-success").classList.remove('active')
+    document.querySelector("#players > div > div > div.modal-body > button.btn.btn-outline-danger").classList.add('active')
+}
+
 //*************************************************************************************** */
 //** Initiation FUNCTION - Runs when 'START GAME' Button is clicked */
 
 function init() {
-  gamePlay = 0;
-  diff = 0;
   sC = document.querySelector("#stones > div > div > div.modal-body > input").value
   gamePlaying = true;
   mancalaBoard = [sC, sC, sC, sC, sC, sC, 0, sC, sC, sC, sC, sC, sC, 0];
   score = [mancalaBoard[6], mancalaBoard[13]];
   activePlayer = 0;
-  document.querySelector("#start-button").remove();
-  document.querySelector("#navbarSupportedContent > form").innerHTML += `<button class='btn btn-outline-danger' id="restart">Clear Game</button>`;
+  document.querySelector("#start-button").remove()
+//   console.log('Did I restart??')
+  document.querySelector("#navbarSupportedContent > form").innerHTML += `<button class='btn btn-outline-danger' id="restart" onclick='init()'>Restart Game</button>`;
   document.querySelector("body > div.container > div > div.col > div:nth-child(1)").classList.add("active");
   updateMancala();
   console.log("Start");
@@ -176,7 +224,7 @@ function checkBoard() {
 //   console.log("the sum of side player 1 is - " + sum1);
 //   console.log("the sum of side player 2 is - " + sum2);
   if (sum1 == 0 || sum2 == 0) {
-    let gamePlaying = false;
+    gamePlaying = false;
     // console.log("One of the pit sides is empty");
     // console.log(gamePlaying);
     if (score[0] > score[1]) {
@@ -195,29 +243,8 @@ function checkBoard() {
 // *************************************************************************************** */
 //****   RESTART GAME FUNCTION  ********/
 
-function restart() {
-    window.location.reload();
-    init();
-}
-document.querySelector("#restart").addEventListener("click", restart);
+// function restart() {
+//     window.location.reload();
+// }
+// document.querySelector("#restart").addEventListener("click", restart);
 
-/*************************************************************************************** */
-//****   Functionality to Change DIFFICULTY in the NavBar Modal  ********/
-
-document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-success").addEventListener("click", easy)
-
-function easy() {
-  diff = 0
-}
-
-document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-warning").addEventListener("click", advanced)
-
-function advanced() {
-  diff = 1
-}
-
-document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-danger").addEventListener("click", legendary)
-
-function legendary() {
-  diff = 2
-}
