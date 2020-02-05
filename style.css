@@ -35,12 +35,6 @@ h1 {
     text-align: center;
 }
 
-/* .board {
-    background-image: url(assets/board2.png);
-    background-repeat: no-repeat;
-    background-position: center;
-} */
-
 .rules {
     margin: 0;
     padding-top: 50px;
@@ -73,19 +67,6 @@ header div {
     justify-content: center;
 }
 
-canvas {
-    border: 1px solid red;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    margin: 0px auto;
-    padding-bottom: 10px;
-    /* top:10px;
-    bottom: 0;
-    left: 0;
-    right: 0; */
-    z-index: -10;
-}
 
 .row {
     border: 1px solid black;

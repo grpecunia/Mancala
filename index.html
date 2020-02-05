@@ -25,6 +25,9 @@
                     <li class="nav-item">
                         <a class="nav-link" onclick="window.location.reload();">Reload Page</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="modal" data-target="#inst">Rules</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
@@ -44,6 +47,38 @@
                 </form>
             </div>
         </nav>
+
+        <!-- Modal Instructions-->
+        <div class="modal fade" id="inst" role="dialog">
+            <div class="modal-dialog">
+        
+                <!-- Modal Instructions content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Rules</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ol>
+                            <li>The game begins with one player picking up all of the pieces in any one of the pockets on his/her side.</li>
+                            <li>Moving counter-clockwise, the player deposits one of the stones in each pocket until the stones run out.
+                            </li>
+                            <li>If you run into your own Mancala (store), deposit one piece in it. If you run into your opponent's Mancala,
+                                skip
+                                it and continue moving to the next pocket.</li>
+                            <li>If the last piece you drop is in your own Mancala, you take another turn.</li>
+                            <li>If the last piece you drop is in an empty pocket on your side, you capture that piece and any pieces in the
+                                pocket directly opposite.</li>
+                        </ol>
+                    </div>
+                    <div class="modal-footer">
+                        <button class='btn btn-outline-success' id="start-button">StartGame</button>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+
 
         <!-- Modal Difficulty-->
         <div class="modal fade" id="difficulty" role="dialog">
@@ -140,23 +175,23 @@
             <div class="col">
                 <-- Player 1 plays in this direction <--
                 <div class="row pit-0">
-                    <button class="col-1" id='5' onclick="move()">0</button>
-                    <button class="col-1" id='4' onclick="move()">0</button>
-                    <button class="col-1" id='3' onclick="move()">0</button>
-                    <button class="col-1" id='2' onclick="move()">0</button>
-                    <button class="col-1" id='1' onclick="move()">0</button>
-                    <button class="col-1" id='0' onclick="move()">0</button>
+                    <button class="btn btn-info" id='5' onclick="move()">0</button>
+                    <button class="btn btn-info" id='4' onclick="move()">0</button>
+                    <button class="btn btn-info" id='3' onclick="move()">0</button>
+                    <button class="btn btn-info" id='2' onclick="move()">0</button>
+                    <button class="btn btn-info" id='1' onclick="move()">0</button>
+                    <button class="btn btn-info" id='0' onclick="move()">0</button>
                 </div>
 
                 
                
                 <div class="row pit-1">
-                    <button class="col-1" id='7' onclick="move()">0</button>
-                    <button class="col-1" id='8' onclick="move()">0</button>
-                    <button class="col-1" id='9' onclick="move()">0</button>
-                    <button class="col-1" id='10' onclick="move()">0</button>
-                    <button class="col-1" id='11' onclick="move()">0</button>
-                    <button class="col-1" id='12' onclick="move()">0</button>
+                    <button class="btn btn-primary" id='7' onclick="move()">0</button>
+                    <button class="btn btn-primary" id='8' onclick="move()">0</button>
+                    <button class="btn btn-primary" id='9' onclick="move()">0</button>
+                    <button class="btn btn-primary" id='10' onclick="move()">0</button>
+                    <button class="btn btn-primary" id='11' onclick="move()">0</button>
+                    <button class="btn btn-primary" id='12' onclick="move()">0</button>
                 </div>
                 --> Player 2 plays in this direction --> 
             </div>

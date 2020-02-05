@@ -1,4 +1,10 @@
+//*************************************************************************************** */
+//** Initial VARIABLE declarations */
+
 var mancalaBoard, activePlayer, score, stoneCount, conditional, gamePlaying;
+
+//*************************************************************************************** */
+//** Initiation FUNCTION - Runs when 'START GAME' Button is clicked */
 
 function init() {
   gamePlaying = true;
@@ -14,7 +20,11 @@ function init() {
   console.log("Start");
 }
 
-document.querySelector("#start-button").addEventListener("click", init);
+document.querySelector("#start-button").addEventListener("click", init); //START GAME onClick Event to init()
+
+
+//*************************************************************************************** */
+//** FUNCTION CENTRAL FOR BOARD MOVES */
 
 function move(loc) {
     document.querySelector("div.row.pit-"+activePlayer).onclick = function(e) {
@@ -74,6 +84,20 @@ function move(loc) {
     console.log("POST > Current Player is Player " + activePlayer);
   };
 }
+//********************************************************************************************* */
+//** Function that checks the BUTTON VALUES and TOOGLES the DISABLE if they are equal to (=) 0 */
+
+function checkButtons() {
+    [...document.querySelector("div.row.pit-" + activePlayer).children].forEach(button => {
+        if (button.innerHTML != 0) {
+          button.removeAttribute("disabled");
+        }
+      }
+    );
+}
+
+//*************************************************************************************** */
+//** Function that UPDATES the PITS ***************************************************  */
 
 function updateMancala() {
   document.querySelector(
@@ -114,9 +138,10 @@ function updateMancala() {
     "body > div.container > div > div.col > div:nth-child(2) > button:nth-child(6)"
   ).innerHTML = mancalaBoard[12];
   document.querySelector("#\\31 3").innerText = mancalaBoard[13];
+   checkButtons();
 }
-
-//****   Functionality to increase and decrease Stone Count in the NavBar Modal  */
+/*************************************************************************************** */
+//****   Functionality to increase and decrease Stone Count in the NavBar Modal  ********/
 document
   .querySelector(
     "#stones > div > div > div.modal-body > button.btn.btn-outline-success"
