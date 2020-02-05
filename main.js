@@ -26,6 +26,8 @@ document.querySelector("#start-button").addEventListener("click", init); //START
 //*************************************************************************************** */
 //** FUNCTION CENTRAL FOR BOARD MOVES */
 
+var rockSound = new Audio('assets/rocksmove.wav');
+
 function move(loc) {
     document.querySelector("div.row.pit-"+activePlayer).onclick = function(e) {
         console.log(e.target.id);
@@ -81,6 +83,7 @@ function move(loc) {
     }
     mancalaBoard[e.target.attributes.id.value] = 0;
     updateMancala();
+    rockSound.play();
     console.log("POST > Current Player is Player " + activePlayer);
   };
 }
