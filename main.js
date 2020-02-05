@@ -52,13 +52,6 @@ function move(loc) {
         [...document.querySelector("div.row.pit-" + activePlayer).children].forEach(button =>
             button.setAttribute('disabled', 'true'));
       activePlayer = 1;
-      [
-        ...document.querySelector("div.row.pit-" + activePlayer).children
-      ].forEach(button => {
-          if (button.innerHTML != 0) {
-            button.removeAttribute("disabled");
-          }
-      });
       document.querySelector("div.row.pit-" + activePlayer).classList.add("active");
       
     } else if (activePlayer === 1 && position === mancalaBoard[13]) {
@@ -69,13 +62,6 @@ function move(loc) {
         ...document.querySelector("div.row.pit-" + activePlayer).children
       ].forEach(button => button.setAttribute("disabled", "true"));
       activePlayer = 0;
-      [
-        ...document.querySelector("div.row.pit-" + activePlayer).children
-      ].forEach(button => {
-          if(button.innerHTML != 0) {
-              button.removeAttribute("disabled");
-          }
-        });
       document.querySelector("div.row.pit-" + activePlayer).classList.add("active");
       
     } else {
@@ -84,6 +70,7 @@ function move(loc) {
     mancalaBoard[e.target.attributes.id.value] = 0;
     updateMancala();
     rockSound.play();
+    checkButtons();
     console.log("POST > Current Player is Player " + activePlayer);
   };
 }
@@ -141,20 +128,15 @@ function updateMancala() {
     "body > div.container > div > div.col > div:nth-child(2) > button:nth-child(6)"
   ).innerHTML = mancalaBoard[12];
   document.querySelector("#\\31 3").innerText = mancalaBoard[13];
-   checkButtons();
+//    checkButtons();
 }
 /*************************************************************************************** */
 //****   Functionality to increase and decrease Stone Count in the NavBar Modal  ********/
-document
-  .querySelector(
-    "#stones > div > div > div.modal-body > button.btn.btn-outline-success"
-  )
-  .addEventListener("click", upStone);
-document
-  .querySelector(
-    "#stones > div > div > div.modal-body > button.btn.btn-outline-danger"
-  )
-  .addEventListener("click", downStone);
+
+document.querySelector("#stones > div > div > div.modal-body > button.btn.btn-outline-success")
+.addEventListener("click", upStone);
+document.querySelector("#stones > div > div > div.modal-body > button.btn.btn-outline-danger")
+.addEventListener("click", downStone);
 
 function upStone() {
   document.querySelector("#stones > div > div > div.modal-body > input")
@@ -165,3 +147,14 @@ function downStone() {
   document.querySelector("#stones > div > div > div.modal-body > input")
     .value--;
 }
+
+// function loadStoneCount() {
+
+// }
+
+/*************************************************************************************** */
+//****   Check if GAME is OVER  ********/
+
+// function checkBoard(){
+//     if (mancalaBoard[0])
+// }
