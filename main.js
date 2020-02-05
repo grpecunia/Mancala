@@ -1,14 +1,15 @@
 //*************************************************************************************** */
 //** Initial VARIABLE declarations */
 
-var mancalaBoard, activePlayer, score, stoneCount, conditional, gamePlaying;
+var mancalaBoard, activePlayer, score, stoneCount, conditional, gamePlaying, sC;
 
 //*************************************************************************************** */
 //** Initiation FUNCTION - Runs when 'START GAME' Button is clicked */
 
 function init() {
+  sC = document.querySelector("#stones > div > div > div.modal-body > input").value
   gamePlaying = true;
-  mancalaBoard = [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0];
+  mancalaBoard = [sC, sC, sC, sC, sC, sC, 0, sC, sC, sC, sC, sC, sC, 0];
   score = [mancalaBoard[6], mancalaBoard[13]];
   activePlayer = 0;
   document.querySelector("#start-button").remove();
@@ -32,34 +33,37 @@ var gameOver = new Audio('assets/gameover.wav');
 
 
 function move(loc) {
-    document.querySelector("div.row.pit-"+activePlayer).onclick = function(e) {
-        // console.log(e.target.id);
-    let stoneCount = mancalaBoard[Number(e.target.id)];
+    document.querySelector("div.row.pit-"+activePlayer).onclick = function(e) {       
+    let stoneCount = Number(mancalaBoard[Number(e.target.id)]);
     let conditional = Number(e.target.attributes.id.value) + stoneCount;
+    console.log(Number(e.target.attributes.id.value), conditional);
     let position;
-    for (let i = Number(e.target.attributes.id.value); i <= Number(e.target.attributes.id.value) + stoneCount; i++) {
-        mancalaBoard[i % 14]++;
-        position = mancalaBoard[conditional]
-    //   console.log('>>>>COND>>> '+conditional, '>>>>POS>>> '+position);
+    for (let i = Number(e.target.attributes.id.value); i <= conditional; i++) {
+        ++mancalaBoard[i % 14];
+        console.log(conditional);
+
+        position = conditional
     }
-    console.log('Position Value: ' + position);
-    console.log('Value at Bucket{6}: ' + mancalaBoard[6]);
-    console.log("Value at Bucket{13}: " + mancalaBoard[13]);
-    console.log("PRE > Current Player is Player " + activePlayer);
+    console.log(conditional);
+
+    console.log("Position Value: " + mancalaBoard[conditional % 14]);
+    // console.log('Value at Bucket{6}: ' + mancalaBoard[6]);
+    // console.log("Value at Bucket{13}: " + mancalaBoard[13]);
+    // console.log("PRE > Current Player is Player " + activePlayer);
     // console.document.querySelector("div.row.pit-" + activePlayer).classList;
     
-    if (activePlayer === 0 && position === mancalaBoard[6]) {
+    if (activePlayer === 0 && mancalaBoard[position%14] === mancalaBoard[6]) {
       activePlayer = 0;
-    } else if (activePlayer === 0 && position !== mancalaBoard[6]) {
+    } else if (activePlayer === 0 && mancalaBoard[position%14] !== mancalaBoard[6]) {
       document.querySelector("div.row.pit-" + activePlayer).classList.remove("active");
         [...document.querySelector("div.row.pit-" + activePlayer).children].forEach(button =>
             button.setAttribute('disabled', 'true'));
       activePlayer = 1;
       document.querySelector("div.row.pit-" + activePlayer).classList.add("active");
       
-    } else if (activePlayer === 1 && position === mancalaBoard[13]) {
+    } else if (activePlayer === 1 && mancalaBoard[position%14] === mancalaBoard[13]) {
       activePlayer = 1;
-    } else if (activePlayer === 1 && position !== mancalaBoard[13]) {
+    } else if (activePlayer === 1 && mancalaBoard[position%14] !== mancalaBoard[13]) {
       document.querySelector("div.row.pit-" + activePlayer).classList.remove("active");
       [
         ...document.querySelector("div.row.pit-" + activePlayer).children
@@ -179,8 +183,10 @@ function checkBoard() {
     // console.log("One of the pit sides is empty");
     // console.log(gamePlaying);
     if (score[0] > score[1]) {
+        gameOver.play();
         alert('Game Over - Player 2 WINS' )
     }
+    gameOver.play();
     alert('Game Over - Player 1 WINS' )
   }
 }
