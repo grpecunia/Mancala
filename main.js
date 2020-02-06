@@ -94,12 +94,10 @@ function pick(){
   };
 
 function validateTurn(position) {
-  if (activePlayer === 0 && mancalaBoard[position % 14] === mancalaBoard[6]) {
+  if (activePlayer === 0 && position % 14 === 6) {
     activePlayer = 0;
   } else if (
-    activePlayer === 0 &&
-    mancalaBoard[position % 14] !== mancalaBoard[6]
-  ) {
+    activePlayer === 0 && position % 14 !== 6) {
     document
       .querySelector("div.row.pit-" + activePlayer)
       .classList.remove("active");
@@ -112,12 +110,12 @@ function validateTurn(position) {
       .classList.add("active");
   } else if (
     activePlayer === 1 &&
-    mancalaBoard[position % 14] === mancalaBoard[13]
+    position % 14 === 13
   ) {
     activePlayer = 1;
   } else if (
     activePlayer === 1 &&
-    mancalaBoard[position % 14] !== mancalaBoard[13]
+    position % 14 !== 13
   ) {
     document
       .querySelector("div.row.pit-" + activePlayer)
@@ -129,7 +127,9 @@ function validateTurn(position) {
     document
       .querySelector("div.row.pit-" + activePlayer)
       .classList.add("active");
-  }
+  } else if (activePlayer === 0 && mancalaBoard[position % 14] === 0) {
+    console.log('this is REAL>>')
+         }
   updateMancala();
   rockSound.play();
   checkButtons();
