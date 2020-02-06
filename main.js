@@ -248,30 +248,41 @@ function checkBoard() {
 //   console.log(gamePlaying);
   let sum1 = 0;
   let sum2 = 0;
-  for (let i = 0; i <= 5; i++) {
-    sum1 += mancalaBoard[i];
+  for (let i = 0; i < 6; i++) {
+    sum1 += Number(mancalaBoard[i]);
   }
 //   console.log(sum1);
-  for (let i = 7; i <= 12; i++) {
-    sum2 += mancalaBoard[i];
+  for (let i = 7; i < 13; i++) {
+    sum2 += Number(mancalaBoard[i]);
   }
-//   console.log(sum2);
-//   console.log("the sum of side player 1 is - " + sum1);
-//   console.log("the sum of side player 2 is - " + sum2);
-  if (sum1 == 0 || sum2 == 0) {
+  // console.log(sum2);
+  console.log("the sum of side player 1 is - " + sum1);
+  console.log("the sum of side player 2 is - " + sum2);
+  if (sum1 === 0 || sum2 === 0) {
     gamePlaying = false;
-    // console.log("One of the pit sides is empty");
-    // console.log(gamePlaying);
-    if (score[0] > score[1]) {
+    console.log("One of the pit sides is empty");
+    console.log(gamePlaying,"Player 1 Score - " + mancalaBoard[6],"Player 2 Score - " + mancalaBoard[13]);
+
+    if (mancalaBoard[6] > mancalaBoard[13]) {
+      gameOver.play();
+      console.log("player 1 wins with score " + mancalaBoard[6]);
+      gameOver.addEventListener(
+        "ended",
+        function() {
+          p1Wins();
+        },
+        false
+      );
+    } else if (mancalaBoard[13] > mancalaBoard[6]){
+        console.log("player 2 wins with score " + mancalaBoard[13]);
         gameOver.play();
-            gameOver.addEventListener('ended', function() {
-            p1Wins();
-            }, false)
+        gameOver.addEventListener('ended', function() {
+          p2Wins();
+      }, false)
+    } else {
+      gameOver.play();
+      tieGame();
     }
-    gameOver.play();
-    gameOver.addEventListener('ended', function() {
-            p2Wins();
-            }, false)
   }
 }
 
