@@ -62,12 +62,12 @@ function init() {
   score = [mancalaBoard[6], mancalaBoard[13]];
   activePlayer = 0;
   document.querySelector("#start-button").remove()
-//   console.log('Did I restart??')
   document.querySelector("#navbarSupportedContent > form").innerHTML += `<button class='btn btn-outline-danger' id="restart" onclick='init()'>Restart Game</button>`;
   document.querySelector("body > div.container > div > div.col > div:nth-child(1)").classList.add("active");
   updateMancala();
   console.log("Start");
   gameStart.play();
+  displayPlayerTurn();
 }
 
 document.querySelector("#start-button").addEventListener("click", init); //START GAME onClick Event to init()
@@ -133,11 +133,12 @@ function validateTurn(position) {
   updateMancala();
   rockSound.play();
   checkButtons();
+  displayPlayerTurn();
   }
 }
 
 //********************************************************************************************* */
-//** Function that checks the BUTTON VALUES and TOOGLES the DISABLE if they are equal to (=) 0 */
+//** Function that checks the BUTTON VALUES and TOGGLES the DISABLE if they are equal to (=) 0 */
 
 function checkButtons() {
     [...document.querySelector("div.row.pit-" + activePlayer).children].forEach(button => {
@@ -215,9 +216,29 @@ function downStone() {
 /*************************************************************************************** */
 //****   Functions to display relevant bottom text  ********/
 
-function toggleDisplay(){
-  $('#targetElement').toggleClass('hide');
-  $('#targetElement').toggleClass('show');
+function displayPlayerTurn() {
+  let p1t = `Player 1's turn`;
+  let p2t = `Player 2's turn`;
+  if(activePlayer === 0) {
+    document.getElementById("btext").innerText = p1t;
+  } else {
+    document.getElementById("btext").innerText = p2t;
+  }
+}
+
+function p1Wins() {
+  let p1w = `Game over. Player 1 wins!`;
+  document.getElementById("btext").innerText = p1w;
+}
+
+function p2Wins() {
+  let p2w = `Game over. Player 2 wins!`;
+  document.getElementById("btext").innerText = p2w;
+}
+
+function tieGame() {
+  let tie = `Game over. It's a tie!`;
+  document.getElementById("btext").innerText = tie;
 }
 
 /*************************************************************************************** */
@@ -244,12 +265,12 @@ function checkBoard() {
     if (score[0] > score[1]) {
         gameOver.play();
             gameOver.addEventListener('ended', function() {
-            alert('Game Over - Player 1 WINS' )
+            p1Wins();
             }, false)
     }
     gameOver.play();
     gameOver.addEventListener('ended', function() {
-            alert("Game Over - Player 1 WINS");
+            p2Wins();
             }, false)
   }
 }
