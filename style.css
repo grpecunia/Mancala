@@ -25,12 +25,18 @@ body {
     src: url("assets/Assyrian3d.ttf");
     font-weight: bold;
     }
+@font-face {
+    font-family: "AssyrianFilled";
+    src: url("assets/Assyrian3dFilled.ttf");
+    font-weight: bold;
+    }
+    
 
 .maintitle h1 {
     color: black;
     font-size: 5.5rem;
     text-align: center;
-    font-family: "Assyrian";
+    font-family: "AssyrianFilled";
     font-weight: bold;
 }
 
