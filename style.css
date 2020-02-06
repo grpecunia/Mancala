@@ -22,12 +22,13 @@ body {
 
 @font-face {
     font-family: "Assyrian";
-    src: url("assets/Assyrian3d.ttf");
+    src: url("assets/Assyrian3D.ttf");
     font-weight: bold;
     }
+
 @font-face {
     font-family: "AssyrianFilled";
-    src: url("assets/Assyrian3dFilled.ttf");
+    src: url("assets/Assyrian3DFilled.ttf");
     font-weight: bold;
     }
     
