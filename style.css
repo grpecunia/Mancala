@@ -14,6 +14,10 @@ body {
     margin: 0;
 }
 
+body>div.container>div {
+    border: none;
+}
+
 @font-face {
     font-family: "Assyrian";
     font-weight: normal;
@@ -61,27 +65,10 @@ body {
 .disableMe {
     pointer-events: none;
 }
-body>div.container>div {
-    background-color: rgba(255, 255, 255, 0.826);
-}
-
-/* body>header>div.rules {
-    background-color: rgba(255, 255, 255, 0.926);
-    margin-left: 50px;
-    margin-right: 50px;
-} */
 
 header #start-b {
     align-content: center;
 }
-
-/* .rules {
-    margin: 0;
-    padding-top: 50px;
-    text-align: center;
-    text-decoration: none;
-    list-style: none;
-} */
 
 button {
     -webkit-transition-duration: 0.4s;
@@ -99,7 +86,6 @@ button:hover {
     color: orange;
     border-radius: 12px;
     font-size: 20px;
-    /* padding: 20px 32px; */
 }
 
 header div {
@@ -118,7 +104,6 @@ header div {
 }
 
 .col {
-    /* border: 1px solid black; */
     padding-bottom: 30px;
     padding-top: 30px;
     justify-content: justify;
@@ -178,11 +163,6 @@ ol {
 
 /* On screens that are 600px or less, set the settings appropiately  */
 @media screen and (max-width: 600px) {
-    
-    body>div.container>div {
-        background-color: rgba(255, 255, 255, 0.000);
-        border: none;
-    }
 
     #bucket-0, #bucket-1 {
         background-image: url(assets/bowl.png);
