@@ -84,17 +84,16 @@ function pick(){
   document.querySelector("div.row.pit-" + activePlayer).onclick = function(e) {
     let stoneCount = Number(mancalaBoard[Number(e.target.id)]);
     let conditional = Number(e.target.attributes.id.value) + stoneCount;
-    console.log(Number(e.target.attributes.id.value), conditional);
     let position;
     for (let i = Number(e.target.attributes.id.value); i <= conditional; i++) {
       ++mancalaBoard[i % 14];
       position = conditional;
     }
     mancalaBoard[e.target.attributes.id.value] = 0;
-    validateTurn()
+    validateTurn(position);
   };
 
-function validateTurn() {
+function validateTurn(position) {
   if (activePlayer === 0 && mancalaBoard[position % 14] === mancalaBoard[6]) {
     activePlayer = 0;
   } else if (
@@ -130,16 +129,13 @@ function validateTurn() {
     document
       .querySelector("div.row.pit-" + activePlayer)
       .classList.add("active");
-  } 
-  move()
+  }
+  updateMancala();
+  rockSound.play();
+  checkButtons();
+  }
 }
 
-function move() {
-    updateMancala();
-    rockSound.play();
-    checkButtons();
-  };
-}
 //********************************************************************************************* */
 //** Function that checks the BUTTON VALUES and TOOGLES the DISABLE if they are equal to (=) 0 */
 
