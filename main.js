@@ -135,44 +135,6 @@ function validateTurn() {
 }
 
 function move() {
-    // pick();
-    // document.querySelector("div.row.pit-"+activePlayer).onclick = function(e) {       
-      // let stoneCount = Number(mancalaBoard[Number(e.target.id)]);
-      // let conditional = Number(e.target.attributes.id.value) + stoneCount;
-      // console.log(Number(e.target.attributes.id.value), conditional);
-      // let position;
-      // for (let i = Number(e.target.attributes.id.value); i <= conditional; i++) {
-        //     ++mancalaBoard[i % 14];
-        //     position = conditional
-        // }
-        // console.log(conditional);
-        // console.log("Position Value: " + mancalaBoard[conditional % 14]);
-        // console.log('Value at Bucket{6}: ' + mancalaBoard[6]);
-        // console.log("Value at Bucket{13}: " + mancalaBoard[13]);
-        // console.log("PRE > Current Player is Player " + activePlayer);
-        // console.document.querySelector("div.row.pit-" + activePlayer).classList;
-        
-    // validateTurn();
-    // if (activePlayer === 0 && mancalaBoard[position%14] === mancalaBoard[6]) {
-    //   activePlayer = 0;
-    // } else if (activePlayer === 0 && mancalaBoard[position%14] !== mancalaBoard[6]) {
-    //   document.querySelector("div.row.pit-" + activePlayer).classList.remove("active");
-    //     [...document.querySelector("div.row.pit-" + activePlayer).children].forEach(button =>
-    //         button.setAttribute('disabled', 'true'));
-    //   activePlayer = 1;
-    //   document.querySelector("div.row.pit-" + activePlayer).classList.add("active");
-      
-    // } else if (activePlayer === 1 && mancalaBoard[position%14] === mancalaBoard[13]) {
-    //   activePlayer = 1;
-    // } else if (activePlayer === 1 && mancalaBoard[position%14] !== mancalaBoard[13]) {
-    //   document.querySelector("div.row.pit-" + activePlayer).classList.remove("active");
-    //   [
-    //     ...document.querySelector("div.row.pit-" + activePlayer).children
-    //   ].forEach(button => button.setAttribute("disabled", "true"));
-    //   activePlayer = 0;
-    //   document.querySelector("div.row.pit-" + activePlayer).classList.add("active");
-    // } 
-    // mancalaBoard[e.target.attributes.id.value] = 0;
     updateMancala();
     rockSound.play();
     checkButtons();
