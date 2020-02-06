@@ -39,6 +39,18 @@ body {
     font-weight: normal;
     font-size: 1.5rem;
 }
+
+.bottomtext {
+    font-family: "Assyrian";
+    font-weight: normal;
+    font-size: 2rem;
+    text-align: center;
+    /* display: none; */
+}
+
+
+
+
 .disableMe {
     pointer-events: none;
 }

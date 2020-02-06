@@ -255,6 +255,14 @@ function downStone() {
 }
 
 /*************************************************************************************** */
+//****   Functions to display relevant bottom text  ********/
+
+function toggleDisplay(){
+  $('#targetElement').toggleClass('hide');
+  $('#targetElement').toggleClass('show');
+}
+
+/*************************************************************************************** */
 //****   Check if GAME  Mancala board to make sure there are values in PITS  ********/
 
 function checkBoard() {
