@@ -67,7 +67,7 @@ function init() {
   updateMancala();
   console.log("Start");
   gameStart.play();
-  displayPlayerTurn();
+  // displayPlayerTurn();
 }
 
 document.querySelector("#start-button").addEventListener("click", init); //START GAME onClick Event to init()
@@ -80,18 +80,57 @@ var rockSound = new Audio('assets/rocksmove.wav');
 var gameStart = new Audio('assets/startgame.wav')
 var gameOver = new Audio('assets/gameover.wav');
 
+
 function pick(){
-  document.querySelector("div.row.pit-" + activePlayer).onclick = function(e) {
-    let stoneCount = Number(mancalaBoard[Number(e.target.id)]);
-    let conditional = Number(e.target.attributes.id.value) + stoneCount;
-    let position;
-    for (let i = Number(e.target.attributes.id.value); i <= conditional; i++) {
-      ++mancalaBoard[i % 14];
-      position = conditional;
-    }
-    mancalaBoard[e.target.attributes.id.value] = 0;
-    validateTurn(position);
-  };
+  if(gamePlay === 1) {
+    console.log("in computer")
+
+    document.querySelector("div.row.pit-" + activePlayer).onclick = function(e) {
+      let stoneCount = Number(mancalaBoard[Number(e.target.id)]);
+      let conditional = Number(e.target.attributes.id.value) + stoneCount;
+      let position;
+      for (let i = Number(e.target.attributes.id.value); i <= conditional; i++) {
+        ++mancalaBoard[i % 14];
+        position = conditional;
+      }
+      mancalaBoard[e.target.attributes.id.value] = 0;
+      validateTurn(position);
+    } 
+    // setTimeout(function() { validateTurn(position); }, 5000);
+    compPick()
+
+  }
+  else if ((gamePlay === 0 && activePlayer === 1) || activePlayer === 0){
+    console.log("multiplayer");
+    document.querySelector("div.row.pit-" + activePlayer).onclick = function(e) {
+      let stoneCount = Number(mancalaBoard[Number(e.target.id)]);
+      let conditional = Number(e.target.attributes.id.value) + stoneCount;
+      let position;
+      for (let i = Number(e.target.attributes.id.value); i <= conditional; i++) {
+        ++mancalaBoard[i % 14];
+        position = conditional;
+      }
+      mancalaBoard[e.target.attributes.id.value] = 0;
+      validateTurn(position);
+    } 
+  } 
+} 
+
+function compPick() {
+  console.log("in compPick");
+  if (diff === 0) {
+    // console.log('>> IM I EVER HERE????')
+      setTimeout(function() {
+        isEasy();
+      }, 2000);
+  }
+  else if (diff === 1) {
+    isAdvanced();
+  }
+  else if (diff === 2) {
+    isLegendary();
+  }
+}
 
 function validateTurn(position) {
   if (activePlayer === 0 && position % 14 === 6) {
@@ -128,14 +167,14 @@ function validateTurn(position) {
       .querySelector("div.row.pit-" + activePlayer)
       .classList.add("active");
   } else if (activePlayer === 0 && mancalaBoard[position % 14] === 0) {
-    console.log('this is REAL>>')
+    // console.log('this is REAL>>')
          }
   updateMancala();
   rockSound.play();
   checkButtons();
   displayPlayerTurn();
-  }
 }
+
 
 //********************************************************************************************* */
 //** Function that checks the BUTTON VALUES and TOGGLES the DISABLE if they are equal to (=) 0 */
@@ -256,16 +295,16 @@ function checkBoard() {
     sum2 += Number(mancalaBoard[i]);
   }
   // console.log(sum2);
-  console.log("the sum of side player 1 is - " + sum1);
-  console.log("the sum of side player 2 is - " + sum2);
+  // console.log("the sum of side player 1 is - " + sum1);
+  // console.log("the sum of side player 2 is - " + sum2);
   if (sum1 === 0 || sum2 === 0) {
     gamePlaying = false;
-    console.log("One of the pit sides is empty");
-    console.log(gamePlaying,"Player 1 Score - " + mancalaBoard[6],"Player 2 Score - " + mancalaBoard[13]);
+    // console.log("One of the pit sides is empty");
+    // console.log(gamePlaying,"Player 1 Score - " + mancalaBoard[6],"Player 2 Score - " + mancalaBoard[13]);
 
     if (mancalaBoard[6] > mancalaBoard[13]) {
       gameOver.play();
-      console.log("player 1 wins with score " + mancalaBoard[6]);
+      // console.log("player 1 wins with score " + mancalaBoard[6]);
       gameOver.addEventListener(
         "ended",
         function() {
@@ -274,7 +313,7 @@ function checkBoard() {
         false
       );
     } else if (mancalaBoard[13] > mancalaBoard[6]){
-        console.log("player 2 wins with score " + mancalaBoard[13]);
+        // console.log("player 2 wins with score " + mancalaBoard[13]);
         gameOver.play();
         gameOver.addEventListener('ended', function() {
           p2Wins();
