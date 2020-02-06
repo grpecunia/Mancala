@@ -156,3 +156,26 @@ ol {
 #inst>div>div>div.modal-body>a {
     text-align: center;
 }
+
+/* On screens that are 600px or less, set the settings appropiately  */
+@media screen and (max-width: 600px) {
+    
+    body>div.container>div {
+        background-color: rgba(255, 255, 255, 0.000);
+        border: none;
+    }
+
+    #bucket-0, #bucket-1 {
+        background-image: url(assets/bowl.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        height: 215px;
+        margin-top: 15%;
+        margin-right: 2%;
+        margin-left: 2%;
+        font-family: "Assyrian";
+        font-size: 1.2rem;
+    }
+
+}
