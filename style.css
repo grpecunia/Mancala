@@ -16,12 +16,14 @@ body {
 
 @font-face {
     font-family: "Assyrian";
+    font-weight: normal;
     src: url("assets/Assyrian.ttf");
     }
 
 @font-face {
-    font-family: "Assyrian3d";
+    font-family: "Assyrian";
     src: url("assets/Assyrian3d.ttf");
+    font-weight: bold;
     }
 
 .maintitle h1 {
@@ -29,10 +31,12 @@ body {
     font-size: 6rem;
     text-align: center;
     font-family: "Assyrian";
+    font-weight: bold;
 }
 
 .col {
     font-family: "Assyrian";
+    font-weight: normal;
     font-size: 1.5rem;
 }
 .disableMe {
@@ -116,6 +120,7 @@ header div {
     margin-right: 2%;
     margin-left: 2%;
     font-family: "Assyrian";
+    font-weight: normal;
     font-size: 1.2rem;
 }
 
