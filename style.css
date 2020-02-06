@@ -28,7 +28,7 @@ body {
 
 .maintitle h1 {
     color: black;
-    font-size: 6rem;
+    font-size: 5.5rem;
     text-align: center;
     font-family: "Assyrian";
     font-weight: bold;
@@ -43,7 +43,7 @@ body {
 .bottomtext {
     font-family: "Assyrian";
     font-weight: normal;
-    font-size: 2rem;
+    font-size: 2.5rem;
     text-align: center;
     /* display: none; */
 }
