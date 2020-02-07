@@ -1,16 +1,10 @@
 function isEasy(event) {
-    let options = [];
-    for (let i = 7; i <= 4; i++) {
-      console.log('i is = '+i)
-        options.push(mancalaBoard[i]);
-    }
-      mancalaBoard.forEach(option => {
-        if (option > 0) {
-          options.push(option)
-        } 
-      });
-    console.log(options)
     let x = Math.floor(Math.random() * 6 + 7);
+    while (document.getElementById(x).attributes.disabled) {
+        console.log("Jamming with them nomeis");
+        x = Math.floor(Math.random() * 6 + 7);
+      }
+
     console.log('Random Index from 7 - 12 for Computer = ['+x+']')
     // console.log(document.getElementById(x).attributes.disabled);
     // console.log('X is = ' + x)
@@ -24,10 +18,4 @@ function isEasy(event) {
         position = conditional;
       }
       mancalaBoard[event.target.attributes.id.value] = 0;
-    
-      // validateTurn(position);
-      // console.log("POS IN computer TURN -=-= " + position, 
-      // 'index is equal to mancalaBoard['+position%14+']');
-
-    
 }
