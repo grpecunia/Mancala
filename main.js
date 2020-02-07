@@ -4,6 +4,7 @@
 // var mancalaBoard, activePlayer, score, stoneCount, conditional, position, gamePlaying, sC, gamePlay, diff;
 
 
+
 /*************************************************************************************** */
 //****   Functionality to Change DIFFICULTY in the NavBar Modal  ********/
 
@@ -105,14 +106,14 @@ function pick(){ // is called once you any player picks a square
       // } 
       // }
       // console.log("here")
-      console.log('Current activePlayer is Player '+ (activePlayer + 1))
+      // console.log('Current activePlayer is Player '+ (activePlayer + 1))
     if (activePlayer === 1) {
-      console.log("Computer Pick triggered!")
+      // console.log("Computer Pick triggered!")
       compPick(event);
     }
   }
   else if (gamePlay === 0) {
-    console.log("multiplayer");
+    // console.log("multiplayer");
     document.querySelector("div.row.pit-" + activePlayer).onclick = function(e) {
       let stoneCount = Number(mancalaBoard[Number(e.target.id)]);
       let conditional = Number(e.target.attributes.id.value) + stoneCount;
@@ -144,15 +145,18 @@ function compPick(event) {
 }
 
 function validateTurn(position) {
-  console.log('Current activePlayer is Player '+ (activePlayer + 1))
-  console.log('Last Play Index before Validation Runs >> mancalaBoard['+position%14+']');
+  // console.log('Current activePlayer is Player '+ (activePlayer + 1))
+  // console.log('Last Play Index before Validation Runs >> mancalaBoard['+position%14+']');
   // if (activePlayer === 0 && position % 14 === 6) { // check if player 1 keeps playing
   if (activePlayer === 0 && position % 14 === 6) { // check if player 1 keeps playing
     activePlayer = 0;
-  } else if (activePlayer === 0 && position % 14 !== 6) {
-    document
-      .querySelector("div.row.pit-" + activePlayer)
-      .classList.remove("active");
+  } 
+  else if (activePlayer === 0 && position % 14 !== 6) {
+    if (mancalaBoard[position % 14] === 1) {
+      console.log("Hello CowBoy!");
+      pickCapture(position);
+    }
+    document.querySelector("div.row.pit-" + activePlayer).classList.remove("active");
     [
       ...document.querySelector("div.row.pit-" + activePlayer).children
     ].forEach(button => button.setAttribute("disabled", "true"));
@@ -161,12 +165,16 @@ function validateTurn(position) {
       .querySelector("div.row.pit-" + activePlayer)
       .classList.add("active");
       // console.log("player 2", activePlayer)
-  } else if (activePlayer === 1 && position % 14 === 13) {
+  } 
+  else if (activePlayer === 1 && position % 14 === 13) {
     activePlayer = 1;
-  } else if (activePlayer === 1 && position % 14 !== 13) {
-    document
-      .querySelector("div.row.pit-" + activePlayer)
-      .classList.remove("active");
+  } 
+  else if (activePlayer === 1 && position % 14 !== 13) {
+    if (mancalaBoard[position % 14] === 1) {
+      console.log("Hello CowBoy!");
+      pickCapture(position);
+    }
+    document.querySelector("div.row.pit-" + activePlayer).classList.remove("active");
     [
       ...document.querySelector("div.row.pit-" + activePlayer).children
     ].forEach(button => button.setAttribute("disabled", "true"));
@@ -176,10 +184,212 @@ function validateTurn(position) {
       .classList.add("active");
   } 
   updateMancala();
+  // console.log()
   rockSound.play();
   checkButtons();
   displayPlayerTurn();
 }
+
+function pickCapture(position) {
+    let inverse = 0;
+    let boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
+    console.log(mancalaBoard[position % 14]);
+    console.log(position%14)
+    switch (position%14) {
+      case 0:
+        console.log("the switch is working 0 - 12")
+        inverse = 12;
+        console.log('the boost = '+ boost)
+        boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
+        if (activePlayer === 0) {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[6] += boost;
+        } else {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[13] += boost;
+        }
+        break;
+      case 1:
+        console.log("the switch is working 1 - 11")
+        inverse = 11;
+        console.log('the boost = '+ boost)
+        boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
+        if (activePlayer === 0) {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[6] += boost;
+        } else {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[13] += boost;
+        }
+        break;
+      case 2:
+        console.log("the switch is working 2 - 10");
+        inverse = 10;
+        console.log('the boost = '+ boost)
+        boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
+        if (activePlayer === 0) {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[6] += boost;
+        } else {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[13] += boost;
+        }
+        break;
+      case 3:
+        console.log("the switch is working 3 - 9");
+        inverse = 9;
+        boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
+        if (activePlayer === 0) {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[6] += boost;
+        } else {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[13] += boost;
+        }
+        break;
+      case 4:
+        console.log("the switch is working 4 - 8");
+        inverse = 8;
+        console.log("boost >> " + boost);
+        console.log("position Index " + (position % 14));
+        console.log("the inverse Index =  " + inverse);
+        boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
+        if (activePlayer === 0) {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[6] += boost;
+        } else {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[13] += boost;
+        }
+        break;
+      case 5:
+        console.log("the switch is working 5 - 7");
+        inverse = 7;
+        boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
+        if (activePlayer === 0) {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[6] += boost;
+        } else {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[13] += boost;
+        }
+        break;
+      case 7:
+        console.log("the switch is working 7 - 5");
+        inverse = 5;
+        boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
+        if (activePlayer === 0) {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[6] += boost;
+        } else {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[13] += boost;
+        }
+        break;
+      case 8:
+        console.log("the switch is working 8 - 4");
+        inverse = 4;
+        boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
+        if (activePlayer === 0) {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[6] += boost;
+        } else {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[13] += boost;
+        }
+        break;
+      case 9:
+        console.log("the switch is working 9 - 3");
+        inverse = 3;
+        boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
+        if (activePlayer === 0) {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[6] += boost;
+        } else {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[13] += boost;
+        }
+        break;
+      case 10:
+        console.log("the switch is working 10 - 2");
+        inverse = 2;
+        boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
+        if (activePlayer === 0) {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[6] += boost;
+        } else {
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+          mancalaBoard[13] += boost;
+        }
+        break;
+      case 11:
+        console.log("the switch is working 11 - 1");
+        inverse = 1;
+        console.log('boost >> '+ boost);
+        console.log("position Index " + position%14);
+        console.log("the inverse Index =  " + inverse);
+        boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
+        if (activePlayer === 0) {
+          mancalaBoard[6] += boost;
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+        } else {
+          mancalaBoard[13] += boost;
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+        }
+        break;
+      case 12:
+        console.log("the switch is working 12 - 0");
+        inverse = 0;
+        boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
+        if (activePlayer === 0) {
+          mancalaBoard[6] += boost;
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+        } else {
+          mancalaBoard[13] += boost;
+          mancalaBoard[position % 14] = 0;
+          mancalaBoard[inverse] = 0;
+        }
+        break;
+      default:
+        console.log("<< Something is WRONG! >>");
+        break;
+    }  
+    // let boost = mancalaBoard[position%14] + mancalaBoard[inverse]
+    // if (activePlayer === 0) {
+    //   mancalaBoard[6] += boost
+    //   mancalaBoard[position%14] = 0
+    //   mancalaBoard[inverse];
+    // } else {
+    //   mancalaBoard[13] += boost;
+    //   mancalaBoard[position % 14] = 0;
+    //   mancalaBoard[inverse];
+    // }
+
+}
+
 
 
 //********************************************************************************************* */

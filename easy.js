@@ -1,11 +1,11 @@
 function isEasy(event) {
     let x = Math.floor(Math.random() * 6 + 7);
     while (document.getElementById(x).attributes.disabled) {
-        console.log("Jamming with them nomeis");
+        // console.log("Jamming with them nomeis");
         x = Math.floor(Math.random() * 6 + 7);
       }
 
-    console.log('Random Index from 7 - 12 for Computer = ['+x+']')
+    // console.log('Random Index from 7 - 12 for Computer = ['+x+']')
     // console.log(document.getElementById(x).attributes.disabled);
     // console.log('X is = ' + x)
     // console.log('X after second term is = ' + x)
