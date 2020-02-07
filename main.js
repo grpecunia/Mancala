@@ -1,13 +1,13 @@
 //*************************************************************************************** */
 //** Initial VARIABLE declarations */
 
-var mancalaBoard, activePlayer, score, stoneCount, conditional, position, gamePlaying, sC, gamePlay, diff;
+// var mancalaBoard, activePlayer, score, stoneCount, conditional, position, gamePlaying, sC, gamePlay, diff;
 
 
 /*************************************************************************************** */
 //****   Functionality to Change DIFFICULTY in the NavBar Modal  ********/
 
-var diff = 0;
+var diff = 0; // TODO - need to grab the initial DIFF Value from the html w/ querySelector
 
 document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-success").addEventListener("click", easy)
 
@@ -61,6 +61,7 @@ function init() {
   mancalaBoard = [sC, sC, sC, sC, sC, sC, 0, sC, sC, sC, sC, sC, sC, 0];
   score = [mancalaBoard[6], mancalaBoard[13]];
   activePlayer = 0;
+  diff = 0;
   document.querySelector("#start-button").remove()
   document.querySelector("#navbarSupportedContent > form").innerHTML += `<button class='btn btn-outline-danger' id="restart" onclick='init()'>Restart Game</button>`;
   document.querySelector("body > div.container > div > div.col > div:nth-child(1)").classList.add("active");
@@ -242,9 +243,9 @@ function updateMancala() {
 /*************************************************************************************** */
 //****   Functionality to increase and decrease Stone Count in the NavBar Modal  ********/
 
-document.querySelector("#stones > div > div > div.modal-body > button.btn.btn-outline-success")
+document.querySelector("#stones > div > div > div.modal-body > button.btn.btn-success")
 .addEventListener("click", upStone);
-document.querySelector("#stones > div > div > div.modal-body > button.btn.btn-outline-danger")
+document.querySelector("#stones > div > div > div.modal-body > button.btn.btn-danger")
 .addEventListener("click", downStone);
 
 function upStone() {

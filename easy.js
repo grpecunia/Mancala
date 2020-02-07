@@ -1,6 +1,7 @@
 function isEasy(event) {
     let options = [];
-    for (let i = 7; i <= 6; i++) {
+    for (let i = 7; i <= 4; i++) {
+      console.log('i is = '+i)
         options.push(mancalaBoard[i]);
     }
       mancalaBoard.forEach(option => {

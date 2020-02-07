@@ -2,6 +2,9 @@
 *** GENERAL
 **********************************************/
 
+
+
+
 body {
     background-image: url('assets/africanbg2.jpg');
     background-size: auto;
@@ -12,6 +15,19 @@ body {
     color: #ffffff;
     text-align: center;
     margin: 0;
+}
+
+body.is-loading *,
+body.is-loading *:before,
+body.is-loading *:after {
+    -moz-animation: none !important;
+    -webkit-animation: none !important;
+    -ms-animation: none !important;
+    animation: none !important;
+    -moz-transition: none !important;
+    -webkit-transition: none !important;
+    -ms-transition: none !important;
+    transition: none !important;
 }
 
 body>div.container>div {
@@ -159,6 +175,18 @@ ol {
 
 #inst>div>div>div.modal-body>a {
     text-align: center;
+}
+
+#about>div>div img {
+    vertical-align: middle;
+    border-style: none;
+    padding-bottom: 10px;
+    margin: 10px;
+}
+
+#about>div>div p {
+    margin: 20px;
+    margin-bottom: 1rem;
 }
 
 /* On screens that are 600px or less, set the settings appropiately  */
