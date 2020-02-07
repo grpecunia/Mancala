@@ -184,7 +184,6 @@ function validateTurn(position) {
       .classList.add("active");
   } 
   updateMancala();
-  // console.log()
   rockSound.play();
   checkButtons();
   displayPlayerTurn();
@@ -518,7 +517,7 @@ function checkBoard() {
     // console.log("One of the pit sides is empty");
     // console.log(gamePlaying,"Player 1 Score - " + mancalaBoard[6],"Player 2 Score - " + mancalaBoard[13]);
 
-    if (mancalaBoard[6] > mancalaBoard[13]) {
+    if (mancalaBoard[6] > mancalaBoard[13] && gamePlaying == false) {
       gameOver.play();
       // console.log("player 1 wins with score " + mancalaBoard[6]);
       gameOver.addEventListener(
@@ -528,7 +527,7 @@ function checkBoard() {
         },
         false
       );
-    } else if (mancalaBoard[13] > mancalaBoard[6]){
+    } else if (mancalaBoard[13] > mancalaBoard[6] && gamePlaying == false){
         // console.log("player 2 wins with score " + mancalaBoard[13]);
         gameOver.play();
         gameOver.addEventListener('ended', function() {
