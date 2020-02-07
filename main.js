@@ -1,13 +1,13 @@
 //*************************************************************************************** */
 //** Initial VARIABLE declarations */
 
-var mancalaBoard, activePlayer, score, stoneCount, conditional, position, gamePlaying, sC, gamePlay, diff;
+// var mancalaBoard, activePlayer, score, stoneCount, conditional, position, gamePlaying, sC, gamePlay, diff;
 
 
 /*************************************************************************************** */
 //****   Functionality to Change DIFFICULTY in the NavBar Modal  ********/
 
-var diff = 0;
+var diff = 0; // TODO - need to grab the initial DIFF Value from the html w/ querySelector
 
 document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-success").addEventListener("click", easy)
 
@@ -56,11 +56,12 @@ function comp() {
 //** Initiation FUNCTION - Runs when 'START GAME' Button is clicked */
 
 function init() {
-  sC = document.querySelector("#stones > div > div > div.modal-body > input").value
+  sC = Number(document.querySelector("#stones > div > div > div.modal-body > input").value)
   gamePlaying = true;
   mancalaBoard = [sC, sC, sC, sC, sC, sC, 0, sC, sC, sC, sC, sC, sC, 0];
   score = [mancalaBoard[6], mancalaBoard[13]];
   activePlayer = 0;
+  diff = 0;
   document.querySelector("#start-button").remove()
   document.querySelector("#navbarSupportedContent > form").innerHTML += `<button class='btn btn-outline-danger' id="restart" onclick='init()'>Restart Game</button>`;
   document.querySelector("body > div.container > div > div.col > div:nth-child(1)").classList.add("active");
@@ -81,34 +82,44 @@ var gameStart = new Audio('assets/startgame.wav')
 var gameOver = new Audio('assets/gameover.wav');
 
 
-function pick(){
-  if(gamePlay === 1) {
-    console.log("in computer")
-
-    document.querySelector("div.row.pit-" + activePlayer).onclick = function(e) {
-      let stoneCount = Number(mancalaBoard[Number(e.target.id)]);
-      let conditional = Number(e.target.attributes.id.value) + stoneCount;
-      let position;
-      for (let i = Number(e.target.attributes.id.value); i <= conditional; i++) {
-        ++mancalaBoard[i % 14];
-        position = conditional;
-      }
-      mancalaBoard[e.target.attributes.id.value] = 0;
-      validateTurn(position);
-    } 
-    // setTimeout(function() { validateTurn(position); }, 5000);
-    compPick()
-
+function pick(){ // is called once you any player picks a square
+  // console.log(event)
+  let e = event
+  if(gamePlay === 1) {  // if you're playing vs pc
+    // if (activePlayer === 0) { 
+      // debugger;
+      // document.querySelector("div.row.pit-" + activePlayer).onclick = function(e) {
+        let stoneCount = Number(mancalaBoard[Number(e.target.id)]);
+        let conditional = Number(e.target.attributes.id.value) + stoneCount;
+        let position = conditional;
+        
+        for (let i = Number(e.target.attributes.id.value); i <= conditional; i++) {
+          ++mancalaBoard[i % 14];
+          // position = conditional;
+        }
+        
+        mancalaBoard[e.target.attributes.id.value] = 0;
+        
+        validateTurn(position);
+        // console.log('POS not in comp ** ' +position)
+      // } 
+      // }
+      // console.log("here")
+      console.log('Current activePlayer is Player '+ (activePlayer + 1))
+    if (activePlayer === 1) {
+      console.log("Computer Pick triggered!")
+      compPick(event);
+    }
   }
-  else if ((gamePlay === 0 && activePlayer === 1) || activePlayer === 0){
+  else if (gamePlay === 0) {
     console.log("multiplayer");
     document.querySelector("div.row.pit-" + activePlayer).onclick = function(e) {
       let stoneCount = Number(mancalaBoard[Number(e.target.id)]);
       let conditional = Number(e.target.attributes.id.value) + stoneCount;
-      let position;
+      let position = conditional;
       for (let i = Number(e.target.attributes.id.value); i <= conditional; i++) {
         ++mancalaBoard[i % 14];
-        position = conditional;
+        // position = conditional;
       }
       mancalaBoard[e.target.attributes.id.value] = 0;
       validateTurn(position);
@@ -116,12 +127,12 @@ function pick(){
   } 
 } 
 
-function compPick() {
-  console.log("in compPick");
+function compPick(event) {
+  console.log("Easy Pick firing off...>>>");
   if (diff === 0) {
     // console.log('>> IM I EVER HERE????')
       setTimeout(function() {
-        isEasy();
+        isEasy(event);
       }, 2000);
   }
   else if (diff === 1) {
@@ -133,10 +144,12 @@ function compPick() {
 }
 
 function validateTurn(position) {
-  if (activePlayer === 0 && position % 14 === 6) {
+  console.log('Current activePlayer is Player '+ (activePlayer + 1))
+  console.log('Last Play Index before Validation Runs >> mancalaBoard['+position%14+']');
+  // if (activePlayer === 0 && position % 14 === 6) { // check if player 1 keeps playing
+  if (activePlayer === 0 && position % 14 === 6) { // check if player 1 keeps playing
     activePlayer = 0;
-  } else if (
-    activePlayer === 0 && position % 14 !== 6) {
+  } else if (activePlayer === 0 && position % 14 !== 6) {
     document
       .querySelector("div.row.pit-" + activePlayer)
       .classList.remove("active");
@@ -147,15 +160,10 @@ function validateTurn(position) {
     document
       .querySelector("div.row.pit-" + activePlayer)
       .classList.add("active");
-  } else if (
-    activePlayer === 1 &&
-    position % 14 === 13
-  ) {
+      // console.log("player 2", activePlayer)
+  } else if (activePlayer === 1 && position % 14 === 13) {
     activePlayer = 1;
-  } else if (
-    activePlayer === 1 &&
-    position % 14 !== 13
-  ) {
+  } else if (activePlayer === 1 && position % 14 !== 13) {
     document
       .querySelector("div.row.pit-" + activePlayer)
       .classList.remove("active");
@@ -166,9 +174,7 @@ function validateTurn(position) {
     document
       .querySelector("div.row.pit-" + activePlayer)
       .classList.add("active");
-  } else if (activePlayer === 0 && mancalaBoard[position % 14] === 0) {
-    // console.log('this is REAL>>')
-         }
+  } 
   updateMancala();
   rockSound.play();
   checkButtons();
@@ -237,9 +243,9 @@ function updateMancala() {
 /*************************************************************************************** */
 //****   Functionality to increase and decrease Stone Count in the NavBar Modal  ********/
 
-document.querySelector("#stones > div > div > div.modal-body > button.btn.btn-outline-success")
+document.querySelector("#stones > div > div > div.modal-body > button.btn.btn-success")
 .addEventListener("click", upStone);
-document.querySelector("#stones > div > div > div.modal-body > button.btn.btn-outline-danger")
+document.querySelector("#stones > div > div > div.modal-body > button.btn.btn-danger")
 .addEventListener("click", downStone);
 
 function upStone() {
