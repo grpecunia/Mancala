@@ -67,7 +67,7 @@ function init() {
   updateMancala();
   console.log("Start");
   gameStart.play();
-  // displayPlayerTurn();
+  displayPlayerTurn();
 }
 
 document.querySelector("#start-button").addEventListener("click", init); //START GAME onClick Event to init()
