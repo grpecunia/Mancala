@@ -189,6 +189,10 @@ ol {
     margin-bottom: 1rem;
 }
 
+blockquote {
+    text-align: center;
+}
+
 /* On screens that are 600px or less, set the settings appropiately  */
 @media screen and (max-width: 600px) {
 

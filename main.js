@@ -3,8 +3,6 @@
 
 // var mancalaBoard, activePlayer, score, stoneCount, conditional, position, gamePlaying, sC, gamePlay, diff;
 
-
-
 /*************************************************************************************** */
 //****   Functionality to Change DIFFICULTY in the NavBar Modal  ********/
 
@@ -64,11 +62,12 @@ function init() {
   activePlayer = 0;
   diff = 0;
   document.querySelector("#start-button").remove()
-  document.querySelector("#navbarSupportedContent > form").innerHTML += `<button class='btn btn-outline-danger' id="restart" onclick='init()'>Restart Game</button>`;
+  document.querySelector("#navbarSupportedContent > form").innerHTML += `<button class='btn btn-warning' id="restart" onclick='init()'>Restart Game</button>`;
   document.querySelector("body > div.container > div > div.col > div:nth-child(1)").classList.add("active");
   updateMancala();
   console.log("Start");
   gameStart.play();
+  changeForComp();
   displayPlayerTurn();
 }
 
@@ -114,12 +113,19 @@ function pick(){ // is called once you any player picks a square
   }
   else if (gamePlay === 0) {
     // console.log("multiplayer");
+    // debugger;
     document.querySelector("div.row.pit-" + activePlayer).onclick = function(e) {
       let stoneCount = Number(mancalaBoard[Number(e.target.id)]);
       let conditional = Number(e.target.attributes.id.value) + stoneCount;
       let position = conditional;
       for (let i = Number(e.target.attributes.id.value); i <= conditional; i++) {
-        ++mancalaBoard[i % 14];
+        if((activePlayer === 0 && i === 13) || (activePlayer === 1 && i === 6)) {
+          console.log(activePlayer, i)
+          conditional++;
+        }
+        else {
+          ++mancalaBoard[i % 14];
+        }
         // position = conditional;
       }
       mancalaBoard[e.target.attributes.id.value] = 0;
@@ -134,7 +140,7 @@ function compPick(event) {
     // console.log('>> IM I EVER HERE????')
       setTimeout(function() {
         isEasy(event);
-      }, 2000);
+      }, 3000);
   }
   else if (diff === 1) {
     isAdvanced();
@@ -200,11 +206,13 @@ function pickCapture(position) {
         inverse = 12;
         console.log('the boost = '+ boost)
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0) {
+        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
+          console.log('well this happened')
+          console.log('well this happened')
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[6] += boost;
-        } else {
+        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[13] += boost;
@@ -215,11 +223,12 @@ function pickCapture(position) {
         inverse = 11;
         console.log('the boost = '+ boost)
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0) {
+        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
+          console.log('well this happened')
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[6] += boost;
-        } else {
+        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[13] += boost;
@@ -230,11 +239,12 @@ function pickCapture(position) {
         inverse = 10;
         console.log('the boost = '+ boost)
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0) {
+        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
+          console.log('well this happened')
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[6] += boost;
-        } else {
+        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[13] += boost;
@@ -244,11 +254,12 @@ function pickCapture(position) {
         console.log("the switch is working 3 - 9");
         inverse = 9;
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0) {
+        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
+          console.log('well this happened')
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[6] += boost;
-        } else {
+        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[13] += boost;
@@ -261,11 +272,12 @@ function pickCapture(position) {
         console.log("position Index " + (position % 14));
         console.log("the inverse Index =  " + inverse);
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0) {
+        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
+          console.log('well this happened')
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[6] += boost;
-        } else {
+        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[13] += boost;
@@ -275,11 +287,12 @@ function pickCapture(position) {
         console.log("the switch is working 5 - 7");
         inverse = 7;
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0) {
+        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
+          console.log('well this happened')
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[6] += boost;
-        } else {
+        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[13] += boost;
@@ -289,11 +302,12 @@ function pickCapture(position) {
         console.log("the switch is working 7 - 5");
         inverse = 5;
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0) {
+        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
+          console.log('well this happened')
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[6] += boost;
-        } else {
+        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[13] += boost;
@@ -303,11 +317,12 @@ function pickCapture(position) {
         console.log("the switch is working 8 - 4");
         inverse = 4;
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0) {
+        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
+          console.log('well this happened')
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[6] += boost;
-        } else {
+        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[13] += boost;
@@ -317,11 +332,12 @@ function pickCapture(position) {
         console.log("the switch is working 9 - 3");
         inverse = 3;
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0) {
+        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
+          console.log('well this happened')
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[6] += boost;
-        } else {
+        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[13] += boost;
@@ -331,11 +347,12 @@ function pickCapture(position) {
         console.log("the switch is working 10 - 2");
         inverse = 2;
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0) {
+        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
+          console.log('well this happened')
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[6] += boost;
-        } else {
+        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[13] += boost;
@@ -348,11 +365,12 @@ function pickCapture(position) {
         console.log("position Index " + position%14);
         console.log("the inverse Index =  " + inverse);
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0) {
+        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
+          console.log('well this happened')
           mancalaBoard[6] += boost;
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
-        } else {
+        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
           mancalaBoard[13] += boost;
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
@@ -362,11 +380,12 @@ function pickCapture(position) {
         console.log("the switch is working 12 - 0");
         inverse = 0;
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0) {
+        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
+          console.log('well this happened') // WORKING HERRRRRRREEE!!!!
           mancalaBoard[6] += boost;
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
-        } else {
+        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
           mancalaBoard[13] += boost;
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
@@ -376,17 +395,6 @@ function pickCapture(position) {
         console.log("<< Something is WRONG! >>");
         break;
     }  
-    // let boost = mancalaBoard[position%14] + mancalaBoard[inverse]
-    // if (activePlayer === 0) {
-    //   mancalaBoard[6] += boost
-    //   mancalaBoard[position%14] = 0
-    //   mancalaBoard[inverse];
-    // } else {
-    //   mancalaBoard[13] += boost;
-    //   mancalaBoard[position % 14] = 0;
-    //   mancalaBoard[inverse];
-    // }
-
 }
 
 
@@ -471,12 +479,29 @@ function downStone() {
 //****   Functions to display relevant bottom text  ********/
 
 function displayPlayerTurn() {
-  let p1t = `Player 1's turn`;
-  let p2t = `Player 2's turn`;
-  if(activePlayer === 0) {
-    document.getElementById("btext").innerText = p1t;
+ if (gamePlay == 0){
+    let p1t = `Player 1's turn`;
+    let p2t = `Player 2's turn`;
+    if(activePlayer === 0) {
+      document.getElementById("btext").innerText = p1t;
+    } else {
+      document.getElementById("btext").innerText = p2t;
+    } 
   } else {
-    document.getElementById("btext").innerText = p2t;
+      let p1t = `Player 1's turn`;
+      let p2t = `Computer's turn`;
+      if(activePlayer === 0) {
+        document.getElementById("btext").innerText = p1t;
+      } else {
+        document.getElementById("btext").innerText = p2t; 
+      }
+  }
+}
+
+function changeForComp() {
+  if (gamePlay == 1) {
+    document.querySelector("#bucket-1 > span").innerText = `Computer's SCORE:`;
+    document.querySelector("body > div > div > div.col > span").innerText = `Computer`
   }
 }
 
@@ -488,6 +513,11 @@ function p1Wins() {
 function p2Wins() {
   let p2w = `Game over. Player 2 wins!`;
   document.getElementById("btext").innerText = p2w;
+}
+
+function compWins() {
+  let comp = `Game over. Computer wins!`;
+  document.getElementById("btext").innerText = comp;
 }
 
 function tieGame() {
@@ -539,12 +569,3 @@ function checkBoard() {
     }
   }
 }
-
-// *************************************************************************************** */
-//****   RESTART GAME FUNCTION  ********/
-
-// function restart() {
-//     window.location.reload();
-// }
-// document.querySelector("#restart").addEventListener("click", restart);
-
