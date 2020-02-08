@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158047845-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-158047845-1');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mancala - A Strategy Game</title>
     <link rel="icon" type="image/png" href="assets/favicon.ico">
-
     <link rel='stylesheet' href='./style.css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -40,6 +48,8 @@
                             <a class="dropdown-item" data-toggle="modal" data-target="#players">Players</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" data-toggle="modal" data-target="#stones">Stone Count</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#sounds">Game Sounds</a>
                         </div>
                     </li>
                 </ul>
@@ -168,6 +178,30 @@
         
             </div>
         </div>
+        <!-- Modal Sounds-->
+        <div class="modal fade" id="sounds" role="dialog">
+            <div class="modal-dialog">
+        
+                <!-- Modal Sounds content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Gameplay Sounds</h4>
+                    </div>
+                    <div class="modal-body">
+                        <button type="button" value='true' class="btn btn-outline-success active"
+                            data-dismiss="modal">On</button>
+                        <br>
+                        <button type="button" value='false' class="btn btn-outline-danger" data-dismiss="modal">Off</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+
         <div class='maintitle'><h1>Mancala</h1>
         </div>
     </header>

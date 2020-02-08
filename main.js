@@ -5,12 +5,33 @@ var rockSound = new Audio("assets/rocksmove.wav");
 var gameStart = new Audio("assets/startgame.wav");
 var gameOver = new Audio("assets/gameover.wav");
 
+document.querySelector("#sounds > div > div > div.modal-body > button.btn.btn-outline-danger").addEventListener("click", muteSounds);
+
+function muteSounds() {
+  document.querySelector("#sounds > div > div > div.modal-body > button.btn.btn-outline-danger").classList.add('active')
+  document.querySelector("#sounds > div > div > div.modal-body > button.btn.btn-outline-success").classList.remove('active')
+  rockSound.muted = true;
+  gameStart.muted = true;
+  gameOver.muted = true;
+}
+
+document.querySelector("#sounds > div > div > div.modal-body > button.btn.btn-outline-success").addEventListener("click", playSounds);
+
+function playSounds() {
+  document.querySelector("#sounds > div > div > div.modal-body > button.btn.btn-outline-success").classList.add('active')
+  document.querySelector("#sounds > div > div > div.modal-body > button.btn.btn-outline-danger").classList.remove('active')
+  rockSound.muted = false;
+  gameStart.muted = false;
+  gameOver.muted = false;
+}
+
 //*************************************************************************************** */
 //** Initiation FUNCTION - Runs when 'START GAME' Button is clicked */
 
 document.querySelector("#start-button").addEventListener("click", init); //START GAME onClick Event to init()
 
 function init() {
+  sounds = document.querySelector("#sounds > div > div > div.modal-body > button.active").value;
   stones = Number(document.querySelector("#stones > div > div > div.modal-body > input").value);
   gamePlay = Number(document.querySelector("#players > div > div > div.modal-body > button.active").value);
   gamePlaying = true;
