@@ -1,70 +1,29 @@
-function superEasy(event) { //easiest
-    console.log('super easy')
+function isEasy(event) { //easiest
+    console.log('Random Selection is Triggered')
     let x = Math.floor(Math.random() * 6 + 7);
-    while (document.getElementById(x).attributes.disabled && document.getElementById(x).innerText != '0') {
-        console.log(x)
-        // console.log("Jamming with them nomeis");
+    while (document.getElementById(x).attributes.disabled ) { //&& document.getElementById(x).innerText != '0'
+        console.log('Random Value Iterator looking for options...')
         x = Math.floor(Math.random() * 6 + 7);
       }
-
-    // console.log('Random Index from 7 - 12 for Computer = ['+x+']')
-    // console.log(document.getElementById(x).attributes.disabled);
-    // console.log('X is = ' + x)
-    // console.log('X after second term is = ' + x)
-    // document.getElementById(x).click(event);
-    //   let stoneCount = Number(mancalaBoard[Number(event.target.id)]);
-    //   let conditional = Number(event.target.attributes.id.value) + stoneCount;
-    //   let position;
-    //   for (let i = Number(event.target.attributes.id.value); i <= conditional; i++) {
-    //     ++mancalaBoard[i % 14];
-    //     position = conditional;
-    //   }
-    //   mancalaBoard[event.target.attributes.id.value] = 0;
-    pickPeice(event, x)
+    pickPiece(event, x)
 }
 
-
-function isEasy(event) { //hardest
-  for (let i = 7; i <= 12; i++) {
-    console.log("bucket", mancalaBoard[i], i);
-    if (13 - i === mancalaBoard[i]) {
-      console.log("take index", i);
-      return pickPeice(event, i);
-
+function pickPiece(event, x){
+  if (gamePlaying == true) {
+    console.log("Picking Position in Index ",x)
+    console.log("The Picked Position had a value of ", mancalaBoard[x]);
+    document.getElementById(x).click(event);
+    let stoneCount = Number(mancalaBoard[Number(event.target.id)]);
+    let conditional = Number(event.target.attributes.id.value) + stoneCount;
+    let position;
+    for (
+      let i = Number(event.target.attributes.id.value);
+      i <= conditional;
+      i++
+    ) {
+      ++mancalaBoard[i % 14];
+      position = conditional;
     }
   }
-  console.log("no first");
-  //pickPeice(event, 13);
-  isLittleEasier(event);
-}
-
-function isLittleEasier(event){ //medium
-  for (let i = 7; i <= 12; i++) {
-    console.log("bucket again", mancalaBoard[i], i);
-    if (13 - i === mancalaBoard[i] + 1) {
-      console.log("second best", i);
-      return pickPeice(event, i);
-    }
-
-  }
-  superEasy(event)
-
-}
-
-
-function pickPeice(event, x){
-        console.log("picking peice ",x)
-        document.getElementById(x).click(event);
-        let stoneCount = Number(mancalaBoard[Number(event.target.id)]);
-        let conditional = Number(event.target.attributes.id.value) + stoneCount;
-        let position;
-        for (
-          let i = Number(event.target.attributes.id.value);
-          i <= conditional;
-          i++
-        ) {
-          ++mancalaBoard[i % 14];
-          position = conditional;
-        }
-        mancalaBoard[event.target.attributes.id.value] = 0;
+  mancalaBoard[event.target.attributes.id.value] = 0;
 }

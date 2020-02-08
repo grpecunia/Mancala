@@ -1,25 +1,26 @@
-function isAdvanced() {
-  let x = Math.floor(Math.random() * 6 + 7);
-  while (document.getElementById(x).attributes.disabled) {
-    // console.log("Jamming with them nomeis");
-    x = Math.floor(Math.random() * 6 + 7);
+function isAdvanced(event) {
+  //hardest
+  for (let i = 7; i <= 12; i++) {
+    // console.log("bucket", mancalaBoard[i], i);
+    if (13 - i === mancalaBoard[i%14]) {
+      console.log("Optimal Option available and Executed with Pick @ Index ", i);
+      return pickPiece(event, i);
+    }
   }
+  // console.log("no first");
+  //pickPiece(event, 13);
+  advRoundTwo(event);
+}
 
-  // console.log('Random Index from 7 - 12 for Computer = ['+x+']')
-  // console.log(document.getElementById(x).attributes.disabled);
-  // console.log('X is = ' + x)
-  // console.log('X after second term is = ' + x)
-  document.getElementById(x).click(event);
-  let stoneCount = Number(mancalaBoard[Number(event.target.id)]);
-  let conditional = Number(event.target.attributes.id.value) + stoneCount;
-  let position;
-  for (
-    let i = Number(event.target.attributes.id.value);
-    i <= conditional;
-    i++
-  ) {
-    ++mancalaBoard[i % 14];
-    position = conditional;
+function advRoundTwo(event) {
+  //medium
+  for (let i = 7; i <= 12; i++) {
+    // console.log("bucket again", mancalaBoard[i], i);
+    if (13 - i === mancalaBoard[i%14] + 1 && mancalaBoard[i%14] !== 0) {
+      console.log("Second Option Executed with Pick @ Index ", i);
+      return pickPiece(event, i);
+    }
+    // debugger;
   }
-  mancalaBoard[event.target.attributes.id.value] = 0;
+  isEasy(event);
 }

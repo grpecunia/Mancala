@@ -17,19 +17,6 @@ body {
     margin: 0;
 }
 
-body.is-loading *,
-body.is-loading *:before,
-body.is-loading *:after {
-    -moz-animation: none !important;
-    -webkit-animation: none !important;
-    -ms-animation: none !important;
-    animation: none !important;
-    -moz-transition: none !important;
-    -webkit-transition: none !important;
-    -ms-transition: none !important;
-    transition: none !important;
-}
-
 body>div.container>div {
     border: none;
 }
@@ -191,6 +178,13 @@ ol {
 
 blockquote {
     text-align: center;
+}
+
+.container {
+    background-image: url('assets/board2.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    
 }
 
 /* On screens that are 600px or less, set the settings appropiately  */

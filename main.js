@@ -1,12 +1,35 @@
 //*************************************************************************************** */
-//** Initial VARIABLE declarations */
+//** Initial Load of Game Sounds */
 
-// var mancalaBoard, activePlayer, score, stoneCount, conditional, position, gamePlaying, sC, gamePlay, diff;
+var rockSound = new Audio("assets/rocksmove.wav");
+var gameStart = new Audio("assets/startgame.wav");
+var gameOver = new Audio("assets/gameover.wav");
+
+//*************************************************************************************** */
+//** Initiation FUNCTION - Runs when 'START GAME' Button is clicked */
+
+document.querySelector("#start-button").addEventListener("click", init); //START GAME onClick Event to init()
+
+function init() {
+  stones = Number(document.querySelector("#stones > div > div > div.modal-body > input").value);
+  gamePlay = Number(document.querySelector("#players > div > div > div.modal-body > button.active").value);
+  gamePlaying = true;
+  mancalaBoard = [stones, stones, stones, stones, stones, stones, 0, stones, stones, stones, stones, stones, stones, 0];
+  score = [mancalaBoard[6], mancalaBoard[13]];
+  activePlayer = 0;
+  diff = Number(document.querySelector("#difficulty > div > div > div.modal-body > button.active").value);
+  document.querySelector("#start-button").remove()
+  document.querySelector("#navbarSupportedContent > form").innerHTML += `<button class='btn btn-warning' id="restart" onclick='init()'>Restart Game</button>`;
+  document.querySelector("body > div.container > div > div.col > div:nth-child(1)").classList.add("active");
+  updateMancala();
+  console.log("Start");
+  gameStart.play();
+  changeForComp();
+  displayPlayerTurn();
+}
 
 /*************************************************************************************** */
 //****   Functionality to Change DIFFICULTY in the NavBar Modal  ********/
-
-var diff = 0; // TODO - need to grab the initial DIFF Value from the html w/ querySelector
 
 document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-success").addEventListener("click", easy)
 
@@ -33,8 +56,6 @@ function legendary() {
 /*************************************************************************************** */
 //****   Functionality to Change PLAYER SETTINGS in the NavBar Modal  ********/
 
-var gamePlay = 0;
-
 document.querySelector("#players > div > div > div.modal-body > button.btn.btn-outline-success").addEventListener("click", multi)
 
 function multi(){
@@ -51,41 +72,15 @@ function comp() {
     document.querySelector("#players > div > div > div.modal-body > button.btn.btn-outline-danger").classList.add('active')
 }
 
-//*************************************************************************************** */
-//** Initiation FUNCTION - Runs when 'START GAME' Button is clicked */
-
-function init() {
-  sC = Number(document.querySelector("#stones > div > div > div.modal-body > input").value)
-  gamePlaying = true;
-  mancalaBoard = [sC, sC, sC, sC, sC, sC, 0, sC, sC, sC, sC, sC, sC, 0];
-  score = [mancalaBoard[6], mancalaBoard[13]];
-  activePlayer = 0;
-  diff = 0;
-  document.querySelector("#start-button").remove()
-  document.querySelector("#navbarSupportedContent > form").innerHTML += `<button class='btn btn-warning' id="restart" onclick='init()'>Restart Game</button>`;
-  document.querySelector("body > div.container > div > div.col > div:nth-child(1)").classList.add("active");
-  updateMancala();
-  console.log("Start");
-  gameStart.play();
-  changeForComp();
-  displayPlayerTurn();
-}
-
-document.querySelector("#start-button").addEventListener("click", init); //START GAME onClick Event to init()
 
 
 //*************************************************************************************** */
 //** FUNCTION CENTRAL FOR BOARD MOVES */
 
-var rockSound = new Audio('assets/rocksmove.wav');
-var gameStart = new Audio('assets/startgame.wav')
-var gameOver = new Audio('assets/gameover.wav');
-
-
 function pick(){ // is called once you any player picks a square
   // console.log(event)
   let e = event
-  if(gamePlay === 1) {  // if you're playing vs pc
+  if(gamePlay === 1 && gamePlaying === true) {  // if you're playing vs pc
     // if (activePlayer === 0) { 
       // debugger;
       // document.querySelector("div.row.pit-" + activePlayer).onclick = function(e) {
@@ -98,20 +93,14 @@ function pick(){ // is called once you any player picks a square
           // position = conditional;
         }
         
-        mancalaBoard[e.target.attributes.id.value] = 0;
-        
-        validateTurn(position);
-        // console.log('POS not in comp ** ' +position)
-      // } 
-      // }
-      // console.log("here")
-      // console.log('Current activePlayer is Player '+ (activePlayer + 1))
+    mancalaBoard[e.target.attributes.id.value] = 0;    
+    validateTurn(position);
     if (activePlayer === 1) {
       // console.log("Computer Pick triggered!")
       compPick(event);
     }
   }
-  else if (gamePlay === 0) {
+  else if (gamePlay === 0 && gamePlaying === true) {
     // console.log("multiplayer");
     // debugger;
     document.querySelector("div.row.pit-" + activePlayer).onclick = function(e) {
@@ -120,7 +109,7 @@ function pick(){ // is called once you any player picks a square
       let position = conditional;
       for (let i = Number(e.target.attributes.id.value); i <= conditional; i++) {
         if((activePlayer === 0 && i === 13) || (activePlayer === 1 && i === 6)) {
-          console.log(activePlayer, i)
+          // console.log(activePlayer, i)
           conditional++;
         }
         else {
@@ -143,7 +132,10 @@ function compPick(event) {
       }, 3000);
   }
   else if (diff === 1) {
-    isAdvanced();
+    setTimeout(function() {
+      isAdvanced(event);
+    }, 3000);
+    
   }
   else if (diff === 2) {
     isLegendary();
@@ -151,14 +143,11 @@ function compPick(event) {
 }
 
 function validateTurn(position) {
-  // console.log('Current activePlayer is Player '+ (activePlayer + 1))
-  // console.log('Last Play Index before Validation Runs >> mancalaBoard['+position%14+']');
-  // if (activePlayer === 0 && position % 14 === 6) { // check if player 1 keeps playing
   if (activePlayer === 0 && position % 14 === 6) { // check if player 1 keeps playing
     activePlayer = 0;
   } 
   else if (activePlayer === 0 && position % 14 !== 6) {
-    if (mancalaBoard[position % 14] === 1) {
+    if (mancalaBoard[position % 14] === 1 && document.getElementById(position%14).attributes.disabled) {
       console.log("Hello CowBoy!");
       pickCapture(position);
     }
@@ -176,7 +165,8 @@ function validateTurn(position) {
     activePlayer = 1;
   } 
   else if (activePlayer === 1 && position % 14 !== 13) {
-    if (mancalaBoard[position % 14] === 1) {
+    if (mancalaBoard[position % 14] === 1 && document.getElementById(position%14).attributes.disabled) {
+      // donde llegaste es = 1 y el atributo en esa posicion esta disabled, pues...
       console.log("Hello CowBoy!");
       pickCapture(position);
     }
@@ -198,197 +188,165 @@ function validateTurn(position) {
 function pickCapture(position) {
     let inverse = 0;
     let boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-    console.log(mancalaBoard[position % 14]);
-    console.log(position%14)
     switch (position%14) {
       case 0:
         console.log("the switch is working 0 - 12")
         inverse = 12;
-        console.log('the boost = '+ boost)
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
-          console.log('well this happened')
-          console.log('well this happened')
+        
+        if (activePlayer === 0 && document.getElementById(position%14).attributes.disabled && mancalaBoard[inverse] !== 0) {
+          console.log('Boost bout to happen...')
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[6] += boost;
-        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
-          mancalaBoard[position % 14] = 0;
-          mancalaBoard[inverse] = 0;
-          mancalaBoard[13] += boost;
-        }
+          console.log("Play was BOOSTED = " + boost);
+      } 
+     
         break;
       case 1:
         console.log("the switch is working 1 - 11")
         inverse = 11;
-        console.log('the boost = '+ boost)
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
-          console.log('well this happened')
+        
+        if (activePlayer === 0 && document.getElementById(position%14).attributes.disabled && mancalaBoard[inverse] !== 0) {
+          console.log("Boost bout to happen...");
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[6] += boost;
-        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
-          mancalaBoard[position % 14] = 0;
-          mancalaBoard[inverse] = 0;
-          mancalaBoard[13] += boost;
-        }
+          console.log("Play was BOOSTED = " + boost);
+        } 
+  
         break;
       case 2:
         console.log("the switch is working 2 - 10");
         inverse = 10;
-        console.log('the boost = '+ boost)
+        // console.log('the boost = '+ boost)
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
-          console.log('well this happened')
+        if (activePlayer === 0 && document.getElementById(position%14).attributes.disabled && mancalaBoard[inverse] !== 0) {
+          console.log("Boost bout to happen...");
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[6] += boost;
-        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
-          mancalaBoard[position % 14] = 0;
-          mancalaBoard[inverse] = 0;
-          mancalaBoard[13] += boost;
-        }
+          console.log("Play was BOOSTED = " + boost);
+        } 
+       
         break;
       case 3:
         console.log("the switch is working 3 - 9");
         inverse = 9;
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
-          console.log('well this happened')
+        if (activePlayer === 0 && document.getElementById(position%14).attributes.disabled && mancalaBoard[inverse] !== 0) {
+          console.log("Boost bout to happen...");
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[6] += boost;
-        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
-          mancalaBoard[position % 14] = 0;
-          mancalaBoard[inverse] = 0;
-          mancalaBoard[13] += boost;
-        }
+          console.log("Play was BOOSTED = " + boost);
+        } 
+       
         break;
       case 4:
         console.log("the switch is working 4 - 8");
         inverse = 8;
-        console.log("boost >> " + boost);
-        console.log("position Index " + (position % 14));
-        console.log("the inverse Index =  " + inverse);
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
-          console.log('well this happened')
+        
+        if (activePlayer === 0 && document.getElementById(position%14).attributes.disabled && mancalaBoard[inverse] !== 0) {
+          console.log("Boost bout to happen...");
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[6] += boost;
-        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
-          mancalaBoard[position % 14] = 0;
-          mancalaBoard[inverse] = 0;
-          mancalaBoard[13] += boost;
-        }
+          console.log("Play was BOOSTED = " + boost);
+        } 
+        
         break;
       case 5:
         console.log("the switch is working 5 - 7");
         inverse = 7;
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
-          console.log('well this happened')
+        if (activePlayer === 0 && document.getElementById(position%14).attributes.disabled && mancalaBoard[inverse] !== 0) {
+          console.log("Boost bout to happen...");
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[6] += boost;
-        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
-          mancalaBoard[position % 14] = 0;
-          mancalaBoard[inverse] = 0;
-          mancalaBoard[13] += boost;
-        }
+          console.log("Play was BOOSTED = " + boost);
+        } 
+
         break;
       case 7:
         console.log("the switch is working 7 - 5");
         inverse = 5;
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
-          console.log('well this happened')
-          mancalaBoard[position % 14] = 0;
-          mancalaBoard[inverse] = 0;
-          mancalaBoard[6] += boost;
-        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
+        
+        if (activePlayer === 1 && document.getElementById(position % 14).attributes.disabled && mancalaBoard[inverse] !== 0) {
+          console.log("Boost bout to happen...");
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[13] += boost;
+          console.log("Play was BOOSTED = " + boost);
         }
         break;
       case 8:
         console.log("the switch is working 8 - 4");
         inverse = 4;
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
-          console.log('well this happened')
-          mancalaBoard[position % 14] = 0;
-          mancalaBoard[inverse] = 0;
-          mancalaBoard[6] += boost;
-        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
+        
+        if (activePlayer === 1 && document.getElementById(position % 14).attributes.disabled && mancalaBoard[inverse] !== 0) {
+          console.log("Boost bout to happen...");
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[13] += boost;
+          console.log("Play was BOOSTED = " + boost);
         }
         break;
       case 9:
         console.log("the switch is working 9 - 3");
         inverse = 3;
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
-          console.log('well this happened')
-          mancalaBoard[position % 14] = 0;
-          mancalaBoard[inverse] = 0;
-          mancalaBoard[6] += boost;
-        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
+        
+        if (activePlayer === 1 && document.getElementById(position % 14).attributes.disabled && mancalaBoard[inverse] !== 0) {
+          console.log("Boost bout to happen...");
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[13] += boost;
+          console.log("Play was BOOSTED = " + boost);
         }
         break;
       case 10:
         console.log("the switch is working 10 - 2");
         inverse = 2;
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
-          console.log('well this happened')
-          mancalaBoard[position % 14] = 0;
-          mancalaBoard[inverse] = 0;
-          mancalaBoard[6] += boost;
-        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
+        
+        if (activePlayer === 1 && document.getElementById(position % 14).attributes.disabled && mancalaBoard[inverse] !== 0) {
+          console.log("Boost bout to happen...");
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
           mancalaBoard[13] += boost;
+          console.log("Play was BOOSTED = " + boost);
         }
         break;
       case 11:
         console.log("the switch is working 11 - 1");
         inverse = 1;
-        console.log('boost >> '+ boost);
-        console.log("position Index " + position%14);
-        console.log("the inverse Index =  " + inverse);
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
-          console.log('well this happened')
-          mancalaBoard[6] += boost;
-          mancalaBoard[position % 14] = 0;
-          mancalaBoard[inverse] = 0;
-        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
+        
+        if (activePlayer === 1 && document.getElementById(position % 14).attributes.disabled && mancalaBoard[inverse] !== 0) {
+          console.log("Boost bout to happen...");
           mancalaBoard[13] += boost;
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
+          console.log("Play was BOOSTED = " + boost);
         }
         break;
       case 12:
         console.log("the switch is working 12 - 0");
         inverse = 0;
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
-        if (activePlayer === 0 && !document.getElementById(position%14).attributes.disabled) {
-          console.log('well this happened') // WORKING HERRRRRRREEE!!!!
-          mancalaBoard[6] += boost;
-          mancalaBoard[position % 14] = 0;
-          mancalaBoard[inverse] = 0;
-        } else if (activePlayer === 1 && !document.getElementById(position % 14).attributes.disabled) {
+         
+        if (activePlayer === 1 && document.getElementById(position % 14).attributes.disabled && mancalaBoard[inverse] !== 0) {
+          console.log("Boost bout to happen...");
           mancalaBoard[13] += boost;
           mancalaBoard[position % 14] = 0;
           mancalaBoard[inverse] = 0;
+          console.log("Play was BOOSTED = " + boost);
         }
         break;
       default:
@@ -511,12 +469,11 @@ function p1Wins() {
 }
 
 function p2Wins() {
-  let p2w = `Game over. Player 2 wins!`;
-  document.getElementById("btext").innerText = p2w;
-}
-
-function compWins() {
-  let comp = `Game over. Computer wins!`;
+  if (gamePlaying == 0) {
+    let p2w = `Game over. Player 2 wins!`;
+    document.getElementById("btext").innerText = p2w;
+  }
+  let comp = `Game over!! Computer dominated the Human again!!`;
   document.getElementById("btext").innerText = comp;
 }
 
@@ -544,10 +501,12 @@ function checkBoard() {
   // console.log("the sum of side player 2 is - " + sum2);
   if (sum1 === 0 || sum2 === 0) {
     gamePlaying = false;
+    [...document.querySelector("div.row.pit-0").children].forEach(button => button.setAttribute("disabled", "true"));
+    [...document.querySelector("div.row.pit-1").children].forEach(button => button.setAttribute("disabled", "true"));
     // console.log("One of the pit sides is empty");
     // console.log(gamePlaying,"Player 1 Score - " + mancalaBoard[6],"Player 2 Score - " + mancalaBoard[13]);
 
-    if (mancalaBoard[6] > mancalaBoard[13] && gamePlaying == false) {
+    if (mancalaBoard[6] > mancalaBoard[13]) {
       gameOver.play();
       // console.log("player 1 wins with score " + mancalaBoard[6]);
       gameOver.addEventListener(
@@ -557,7 +516,7 @@ function checkBoard() {
         },
         false
       );
-    } else if (mancalaBoard[13] > mancalaBoard[6] && gamePlaying == false){
+    } else if (mancalaBoard[13] > mancalaBoard[6]){
         // console.log("player 2 wins with score " + mancalaBoard[13]);
         gameOver.play();
         gameOver.addEventListener('ended', function() {
