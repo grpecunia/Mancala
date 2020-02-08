@@ -171,6 +171,10 @@ ol {
     margin: 10px;
 }
 
+header img {
+    height: 100px;
+}
+
 #about>div>div p {
     margin: 20px;
     margin-bottom: 1rem;
