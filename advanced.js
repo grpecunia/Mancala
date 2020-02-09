@@ -16,10 +16,10 @@ function advRoundTwo(event) {
   //medium
   for (let i = 7; i <= 12; i++) {
     // console.log("bucket again", mancalaBoard[i], i);
-    if (13 - i === mancalaBoard[i % 14] && mancalaBoard[i % 14] !== 0) {
-      console.log("Second Optimal Option Executed with Pick @ Index ", i);
-      return pickPiece(event, i);
-    }
+     if (mancalaBoard[i] === 6 && i == 7) {
+       console.log("Second Optimal Option Executed with Pick @ Index ", i);
+       return pickPiece(event, i);
+     }
     // debugger;
   }
   advRoundThree(event);
@@ -43,8 +43,7 @@ function advRoundFour(event) {
   //medium
   for (let i = 7; i <= 12; i++) {
     // console.log("bucket again", mancalaBoard[i], i);
-    if (mancalaBoard[i % 14] >= 6 && mancalaBoard[i % 14] !== 0) {
-    
+    if (13 - i === mancalaBoard[i % 14] && mancalaBoard[i % 14] !== 0) {
       console.log("Forth Option Executed with Pick @ Index ", i);
       return pickPiece(event, i);
     }

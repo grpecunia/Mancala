@@ -102,7 +102,7 @@ function comp() {
 
 function pick(){ // is called once you any player picks a square
   // console.log(event)
-  checkBoard()
+  // checkBoard()
   let e = event
   if(gamePlay === 1 && gamePlaying === true) {  // if you're playing vs pc
     // if (activePlayer === 0) { 
@@ -113,7 +113,7 @@ function pick(){ // is called once you any player picks a square
       let position = conditional;
       
       for (let i = Number(e.target.attributes.id.value); i <= conditional; i++) {
-        console.log(activePlayer, i%14)
+        // console.log(activePlayer, i%14)
           if((activePlayer === 0 && i%14 === 13) || (activePlayer === 1 && i%14 === 6)) {
           conditional++;
         }
@@ -121,7 +121,8 @@ function pick(){ // is called once you any player picks a square
         // position = conditional;
       }
         
-    mancalaBoard[e.target.attributes.id.value] = 0;    
+    mancalaBoard[e.target.attributes.id.value] = 0; 
+    checkBoard();   
     validateTurn(position);
     if (activePlayer === 1) {
       // console.log("Computer Pick triggered!")
@@ -129,7 +130,7 @@ function pick(){ // is called once you any player picks a square
     }
   }
   else if (gamePlay === 0 && gamePlaying === true) {
-    console.log("multiplayer");
+    // console.log("multiplayer");
     // debugger;
     document.querySelector("div.row.pit-" + activePlayer).onclick = function(e) {
       let stoneCount = Number(mancalaBoard[Number(e.target.id)]);
@@ -138,7 +139,7 @@ function pick(){ // is called once you any player picks a square
       for (let i = Number(e.target.attributes.id.value); i <= conditional; i++) {
         console.log(activePlayer, i%14);
         if((activePlayer === 0 && i%14 === 13) || (activePlayer === 1 && i%14 === 6)) {
-          console.log(activePlayer, i)
+          // console.log(activePlayer, i)
           conditional++;
         }
         else {
@@ -147,7 +148,7 @@ function pick(){ // is called once you any player picks a square
         // position = conditional;
       }
       mancalaBoard[e.target.attributes.id.value] = 0;
-      pickCapture();
+      checkBoard();
       validateTurn(position);
     } 
   } 
@@ -403,7 +404,6 @@ function checkButtons() {
 //** Function that UPDATES the PITS ***************************************************  */
 
 function updateMancala() {
-  pickCapture();
   document.querySelector(
     "body > div.container > div > div.col > div:nth-child(1) > button:nth-child(6)"
   ).innerHTML = mancalaBoard[0];
@@ -442,7 +442,11 @@ function updateMancala() {
     "body > div.container > div > div.col > div:nth-child(2) > button:nth-child(6)"
   ).innerHTML = mancalaBoard[12];
   document.querySelector("#\\31 3").innerText = mancalaBoard[13];
-  checkBoard();
+  let totalGameStones = 0;
+  for (let i = 0; i <=13; i++) {
+    totalGameStones += Number(mancalaBoard[i]);
+  }
+  console.log('Current Total Stones @ ',totalGameStones)
 }
 
 
@@ -485,6 +489,7 @@ function displayPlayerTurn() {
         document.getElementById("btext").innerText = p2t; 
       }
   }
+  checkBoard();
 }
 
 function changeForComp() {
@@ -500,7 +505,7 @@ function p1Wins() {
 }
 
 function p2Wins() {
-  if (gamePlaying == 0) {
+  if (gamePlay == 0) {
     let p2w = `Game over. Player 2 wins!`;
     document.getElementById("btext").innerText = p2w;
   }
@@ -518,6 +523,10 @@ function tieGame() {
 
 function checkBoard() {
 //   console.log(gamePlaying);
+  score[0] = mancalaBoard[6];
+  score[1] = mancalaBoard[13];
+  console.log("Current Score for Player 1 = ", score [0])
+  console.log("Current Score for Player 2 = ", score[1]);
   let sum1 = 0;
   let sum2 = 0;
   for (let i = 0; i < 6; i++) {
@@ -558,7 +567,7 @@ function checkBoard() {
         gameOver.addEventListener('ended', function() {
           p2Wins();
       }, false)
-    } else if (score[1] > score[0]) {
+    } else if (score[1] === score[0]) {
       gameOver.play();
       tieGame();
     }
@@ -569,6 +578,7 @@ function checkBoard() {
 
 function pickCapture(position) {
   if (gamePlaying == true && position !== undefined) {
+    console.log('<<Dropped into PickCapture!>>')
     // debugger;
     let inverse = 0;
     let boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
