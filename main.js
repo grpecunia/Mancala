@@ -102,6 +102,7 @@ function comp() {
 
 function pick(){ // is called once you any player picks a square
   // console.log(event)
+  checkBoard()
   let e = event
   if(gamePlay === 1 && gamePlaying === true) {  // if you're playing vs pc
     // if (activePlayer === 0) { 
@@ -531,6 +532,7 @@ function checkBoard() {
     gamePlaying = false;
     score[0] = mancalaBoard[6] += sum1;
     score[1] = mancalaBoard[13] += sum2;
+    mancalaBoard = [0,0,0,0,0,0, score[0],0,0,0,0,0,0,score[1]];
     [...document.querySelector("div.row.pit-0").children].forEach(button => button.setAttribute("disabled", "true"));
     [...document.querySelector("div.row.pit-0").children].forEach(button => button.innerText = '0');
     [...document.querySelector("div.row.pit-1").children].forEach(button => button.setAttribute("disabled", "true"));
