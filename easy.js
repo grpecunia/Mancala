@@ -1,5 +1,5 @@
 function isEasy(event) { //easiest
-    console.log('Random Selection is Triggered')
+    console.log('Random PICK Selection is Triggered')
     let x = Math.floor(Math.random() * 6 + 7);
     while (document.getElementById(x).attributes.disabled ) { //&& document.getElementById(x).innerText != '0'
         console.log('Random Value Iterator looking for options...')

@@ -28,25 +28,27 @@ function playSounds() {
 //*************************************************************************************** */
 //** Initiation FUNCTION - Runs when 'START GAME' Button is clicked */
 
-document.querySelector("#start-button").addEventListener("click", init); //START GAME onClick Event to init()
+// document.querySelector("#start-button").addEventListener("click", init); //START GAME onClick Event to init()
 
 function init() {
   sounds = document.querySelector("#sounds > div > div > div.modal-body > button.active").value;
   stones = Number(document.querySelector("#stones > div > div > div.modal-body > input").value);
   gamePlay = Number(document.querySelector("#players > div > div > div.modal-body > button.active").value);
+  diff = Number(document.querySelector("#difficulty > div > div > div.modal-body > button.active").value);
   gamePlaying = true;
+  activePlayer = 0;
   mancalaBoard = [stones, stones, stones, stones, stones, stones, 0, stones, stones, stones, stones, stones, stones, 0];
   score = [mancalaBoard[6], mancalaBoard[13]];
-  activePlayer = 0;
-  diff = Number(document.querySelector("#difficulty > div > div > div.modal-body > button.active").value);
-  document.querySelector("#start-button").remove()
-  document.querySelector("#navbarSupportedContent > form").innerHTML += `<button class='btn btn-warning' id="restart" onclick='init()'>Restart Game</button>`;
   document.querySelector("body > div.container > div > div.col > div:nth-child(1)").classList.add("active");
+  document.querySelector("body > div.container > div > div.col > div:nth-child(2)").classList.remove("active");
   updateMancala();
-  console.log("Start");
-  gameStart.play();
+  checkButtons();
   changeForComp();
   displayPlayerTurn();
+  gameStart.play();
+  document.querySelector("#start-button").remove()
+  document.querySelector("#navbarSupportedContent > form").innerHTML += `<button class='btn btn-warning' id="start-button" onclick='init()'>Restart Game</button>`;
+  console.log("Start");
 }
 
 /*************************************************************************************** */
@@ -105,14 +107,18 @@ function pick(){ // is called once you any player picks a square
     // if (activePlayer === 0) { 
       // debugger;
       // document.querySelector("div.row.pit-" + activePlayer).onclick = function(e) {
-        let stoneCount = Number(mancalaBoard[Number(e.target.id)]);
-        let conditional = Number(e.target.attributes.id.value) + stoneCount;
-        let position = conditional;
-        
-        for (let i = Number(e.target.attributes.id.value); i <= conditional; i++) {
-          ++mancalaBoard[i % 14];
-          // position = conditional;
+      let stoneCount = Number(mancalaBoard[Number(e.target.id)]);
+      let conditional = Number(e.target.attributes.id.value) + stoneCount;
+      let position = conditional;
+      
+      for (let i = Number(e.target.attributes.id.value); i <= conditional; i++) {
+        console.log(activePlayer, i%14)
+          if((activePlayer === 0 && i%14 === 13) || (activePlayer === 1 && i%14 === 6)) {
+          conditional++;
         }
+        ++mancalaBoard[i % 14];
+        // position = conditional;
+      }
         
     mancalaBoard[e.target.attributes.id.value] = 0;    
     validateTurn(position);
@@ -122,15 +128,16 @@ function pick(){ // is called once you any player picks a square
     }
   }
   else if (gamePlay === 0 && gamePlaying === true) {
-    // console.log("multiplayer");
+    console.log("multiplayer");
     // debugger;
     document.querySelector("div.row.pit-" + activePlayer).onclick = function(e) {
       let stoneCount = Number(mancalaBoard[Number(e.target.id)]);
       let conditional = Number(e.target.attributes.id.value) + stoneCount;
       let position = conditional;
       for (let i = Number(e.target.attributes.id.value); i <= conditional; i++) {
-        if((activePlayer === 0 && i === 13) || (activePlayer === 1 && i === 6)) {
-          // console.log(activePlayer, i)
+        console.log(activePlayer, i%14);
+        if((activePlayer === 0 && i%14 === 13) || (activePlayer === 1 && i%14 === 6)) {
+          console.log(activePlayer, i)
           conditional++;
         }
         else {
@@ -145,20 +152,20 @@ function pick(){ // is called once you any player picks a square
 } 
 
 function compPick(event) {
-  console.log("Easy Pick firing off...>>>");
-  if (diff === 0) {
+  console.log("COMP Pick firing off...>>>");
+  if (diff === 0 && gamePlaying == true) {
     // console.log('>> IM I EVER HERE????')
       setTimeout(function() {
         isEasy(event);
       }, 3000);
   }
-  else if (diff === 1) {
+  else if (diff === 1 && gamePlaying == true) {
     setTimeout(function() {
       isAdvanced(event);
     }, 3000);
     
   }
-  else if (diff === 2) {
+  else if (diff === 2 && gamePlaying == true) {
     isLegendary();
   }
 }
@@ -187,7 +194,6 @@ function validateTurn(position) {
   } 
   else if (activePlayer === 1 && position % 14 !== 13) {
     if (mancalaBoard[position % 14] === 1 && document.getElementById(position%14).attributes.disabled) {
-      // donde llegaste es = 1 y el atributo en esa posicion esta disabled, pues...
       console.log("Hello CowBoy!");
       pickCapture(position);
     }
@@ -210,7 +216,7 @@ function pickCapture(position) {
     let inverse = 0;
     let boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
     switch (position%14) {
-      case 0:
+      case 0 :
         console.log("the switch is working 0 - 12")
         inverse = 12;
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
@@ -224,7 +230,7 @@ function pickCapture(position) {
       } 
      
         break;
-      case 1:
+      case 1 :
         console.log("the switch is working 1 - 11")
         inverse = 11;
         boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
@@ -374,12 +380,13 @@ function pickCapture(position) {
         console.log("<< Something is WRONG! >>");
         break;
     }  
+    checkBoard()
 }
 
 
 
-//********************************************************************************************* */
-//** Function that checks the BUTTON VALUES and TOGGLES the DISABLE if they are equal to (=) 0 */
+// //********************************************************************************************* */
+// //** Function that checks the BUTTON VALUES and TOGGLES the DISABLE if they are equal to (=) 0 */
 
 function checkButtons() {
     [...document.querySelector("div.row.pit-" + activePlayer).children].forEach(button => {
@@ -522,14 +529,18 @@ function checkBoard() {
   // console.log("the sum of side player 2 is - " + sum2);
   if (sum1 === 0 || sum2 === 0) {
     gamePlaying = false;
+    score[0] = mancalaBoard[6] += sum1;
+    score[1] = mancalaBoard[13] += sum2;
     [...document.querySelector("div.row.pit-0").children].forEach(button => button.setAttribute("disabled", "true"));
+    [...document.querySelector("div.row.pit-0").children].forEach(button => button.innerText = '0');
     [...document.querySelector("div.row.pit-1").children].forEach(button => button.setAttribute("disabled", "true"));
+    [...document.querySelector("div.row.pit-1").children].forEach(button => button.innerText = '0');
     // console.log("One of the pit sides is empty");
     // console.log(gamePlaying,"Player 1 Score - " + mancalaBoard[6],"Player 2 Score - " + mancalaBoard[13]);
 
-    if (mancalaBoard[6] > mancalaBoard[13]) {
+    if (score[0] > score[1]) {
       gameOver.play();
-      // console.log("player 1 wins with score " + mancalaBoard[6]);
+      // console.log("player 1 wins with score " + score[6]);
       gameOver.addEventListener(
         "ended",
         function() {
@@ -537,13 +548,13 @@ function checkBoard() {
         },
         false
       );
-    } else if (mancalaBoard[13] > mancalaBoard[6]){
-        // console.log("player 2 wins with score " + mancalaBoard[13]);
+    } else if (score[1] > score[0]){
+        // console.log("player 2 wins with score " + score[13]);
         gameOver.play();
         gameOver.addEventListener('ended', function() {
           p2Wins();
       }, false)
-    } else {
+    } else if (score[1] > score[0]) {
       gameOver.play();
       tieGame();
     }
