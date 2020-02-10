@@ -19,6 +19,7 @@ function pickPiece(event, x){
     let stoneCount = Number(mancalaBoard[Number(event.target.id)]);
     let conditional = Number(event.target.attributes.id.value) + stoneCount;
     let position;
+    
     for (let i = Number(event.target.attributes.id.value); i <= conditional; i++) {
       // console.log(activePlayer, i % 14);
       if (
