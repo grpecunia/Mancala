@@ -71,7 +71,7 @@ function advRoundSix(event) {
   //medium
   for (let i = 7; i <= 12; i++) {
     // console.log("bucket again", mancalaBoard[i], i);
-    if (12 - i === mancalaBoard[i % 14] && mancalaBoard[i % 14] !== 0) {
+    if (14 - i === mancalaBoard[i % 14]) {
       console.log("Sixth Option Executed with Pick @ Index ", i);
       return pickPiece(event, i);
     }

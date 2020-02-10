@@ -58,6 +58,8 @@ document.querySelector("#difficulty > div > div > div.modal-body > button.btn.bt
 
 function easy() {
   diff = 0;
+  document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-success").classList.add('active')
+  document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-warning").classList.remove('active')
 }
 
 document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-warning").addEventListener("click", advanced)
@@ -122,7 +124,7 @@ function pick(){ // is called once you any player picks a square
       }
         
     mancalaBoard[e.target.attributes.id.value] = 0; 
-    checkBoard();   
+    // checkBoard();   
     validateTurn(position);
     if (activePlayer === 1) {
       // console.log("Computer Pick triggered!")
@@ -130,7 +132,7 @@ function pick(){ // is called once you any player picks a square
     }
   }
   else if (gamePlay === 0 && gamePlaying === true) {
-    // console.log("multiplayer");
+    console.log("multiplayer");
     // debugger;
     document.querySelector("div.row.pit-" + activePlayer).onclick = function(e) {
       let stoneCount = Number(mancalaBoard[Number(e.target.id)]);
@@ -148,27 +150,31 @@ function pick(){ // is called once you any player picks a square
         // position = conditional;
       }
       mancalaBoard[e.target.attributes.id.value] = 0;
-      checkBoard();
+      // checkBoard();
       validateTurn(position);
     } 
   } 
+  checkButtons();
 } 
 
 function compPick(event) {
   console.log("COMP Pick firing off...>>>");
   if (diff === 0 && gamePlaying == true) {
     // console.log('>> IM I EVER HERE????')
+    checkButtons();
       setTimeout(function() {
         isEasy(event);
       }, 3000);
   }
   else if (diff === 1 && gamePlaying == true) {
+    checkButtons();
     setTimeout(function() {
       isAdvanced(event);
     }, 3000);
     
   }
   else if (diff === 2 && gamePlaying == true) {
+    checkButtons();
     isLegendary();
   }
 }
@@ -209,9 +215,9 @@ function validateTurn(position) {
       .querySelector("div.row.pit-" + activePlayer)
       .classList.add("active");
   } 
+  checkButtons();
   updateMancala();
   rockSound.play();
-  checkButtons();
   displayPlayerTurn();
 }
 
@@ -442,6 +448,7 @@ function updateMancala() {
     "body > div.container > div > div.col > div:nth-child(2) > button:nth-child(6)"
   ).innerHTML = mancalaBoard[12];
   document.querySelector("#\\31 3").innerText = mancalaBoard[13];
+  checkButtons();
   let totalGameStones = 0;
   for (let i = 0; i <=13; i++) {
     totalGameStones += Number(mancalaBoard[i]);
@@ -496,7 +503,9 @@ function changeForComp() {
   if (gamePlay == 1) {
     document.querySelector("#bucket-1 > span").innerText = `Computer's SCORE:`;
     document.querySelector("body > div > div > div.col > span").innerText = `Computer`
-  }
+  } 
+    document.querySelector("#bucket-1 > span").innerText = `Player 2's SCORE:`;
+    document.querySelector("body > div > div > div.col > span").innerText = `Player 2`
 }
 
 function p1Wins() {
@@ -525,7 +534,7 @@ function checkBoard() {
 //   console.log(gamePlaying);
   score[0] = mancalaBoard[6];
   score[1] = mancalaBoard[13];
-  console.log("Current Score for Player 1 = ", score [0])
+  console.log("Current Score for Player 1 = ", score[0])
   console.log("Current Score for Player 2 = ", score[1]);
   let sum1 = 0;
   let sum2 = 0;
@@ -544,6 +553,8 @@ function checkBoard() {
     score[0] = mancalaBoard[6] += sum1;
     score[1] = mancalaBoard[13] += sum2;
     mancalaBoard = [0,0,0,0,0,0, score[0],0,0,0,0,0,0,score[1]];
+    document.querySelector("#\\36 ").innerText = score[0];
+    document.querySelector("#\\31 3").innerText = score[1];
     [...document.querySelector("div.row.pit-0").children].forEach(button => button.setAttribute("disabled", "true"));
     [...document.querySelector("div.row.pit-0").children].forEach(button => button.innerText = '0');
     [...document.querySelector("div.row.pit-1").children].forEach(button => button.setAttribute("disabled", "true"));
@@ -581,7 +592,7 @@ function pickCapture(position) {
     console.log('<<Dropped into PickCapture!>>')
     // debugger;
     let inverse = 0;
-    let boost = mancalaBoard[position % 14] + mancalaBoard[inverse];
+    let boost = 0;
     if (activePlayer === 0){
   
       switch (position % 14) {
@@ -666,7 +677,7 @@ function pickCapture(position) {
           }
           break;
         default:
-          console.log("<< Something is WRONG! >>");
+          console.log("<< Not on your side - its not your pie! >>");
           break;
       }
     } 
@@ -752,10 +763,10 @@ function pickCapture(position) {
           }
           break;
         default:
-          console.log("<< Something is WRONG! >>");
+          console.log("<< Not on your side - its not your pie! >>");
           break;
       }
     }
   }
-  checkBoard();
+  // checkBoard();
 }
