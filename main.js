@@ -87,6 +87,7 @@ function multi(){
     gamePlay = 0
     document.querySelector("#players > div > div > div.modal-body > button.btn.btn-outline-success").classList.add('active')
     document.querySelector("#players > div > div > div.modal-body > button.btn.btn-outline-danger").classList.remove('active')
+    displayPlayerTurn();
 }
 
 document.querySelector("#players > div > div > div.modal-body > button.btn.btn-outline-danger").addEventListener("click", comp)
@@ -95,6 +96,8 @@ function comp() {
     gamePlay = 1;
     document.querySelector("#players > div > div > div.modal-body > button.btn.btn-outline-success").classList.remove('active')
     document.querySelector("#players > div > div > div.modal-body > button.btn.btn-outline-danger").classList.add('active')
+    displayPlayerTurn();
+    changeForComp();
 }
 
 
@@ -500,12 +503,13 @@ function displayPlayerTurn() {
 }
 
 function changeForComp() {
-  if (gamePlay == 1) {
+  if (gamePlay === 1) {
     document.querySelector("#bucket-1 > span").innerText = `Computer's SCORE:`;
     document.querySelector("body > div > div > div.col > span").innerText = `Computer`
-  } 
+  } else {
     document.querySelector("#bucket-1 > span").innerText = `Player 2's SCORE:`;
     document.querySelector("body > div > div > div.col > span").innerText = `Player 2`
+  }
 }
 
 function p1Wins() {
