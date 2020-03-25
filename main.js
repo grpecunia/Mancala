@@ -54,6 +54,7 @@ function init() {
 /*************************************************************************************** */
 //****   Functionality to Change DIFFICULTY in the NavBar Modal  ********/
 
+//Easy Difficulty
 document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-success").addEventListener("click", easy)
 
 function easy() {
@@ -62,6 +63,7 @@ function easy() {
   document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-warning").classList.remove('active')
 }
 
+//Advanced (Normal) Difficulty
 document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-warning").addEventListener("click", advanced)
 
 function advanced() {
@@ -70,13 +72,14 @@ function advanced() {
   document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-warning").classList.add('active')
 }
 
-document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-danger").addEventListener("click", legendary)
+//Legendary Difficulty
+// document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-danger").addEventListener("click", legendary)
 
-function legendary() {
-  diff = 2;
-  document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-success").classList.remove('active')
-  document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-danger").classList.add('active')
-}
+// function legendary() {
+//   diff = 2;
+//   document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-success").classList.remove('active')
+//   document.querySelector("#difficulty > div > div > div.modal-body > button.btn.btn-outline-danger").classList.add('active')
+// }
 
 /*************************************************************************************** */
 //****   Functionality to Change PLAYER SETTINGS in the NavBar Modal  ********/
