@@ -1,4 +1,4 @@
-<h1>The Online Mancala Game - DOM</h1>
+<h1>The Online Mancala Game</h1>
 <h2>About the Project<h2>
     
 <p><a href="https://en.wikipedia.org/wiki/Mancala" target="_blank">Mancala</a> is one of the oldest known games to still be widely played today. Mancala is a two-player turn-based strategy board game played with small stones, beans, or seeds and rows of holes or pits in the earth, a board or other playing surface. The objective is to capture more pieces than the opponent. There are over 200 variations of Mancala dating back to the 7th century.
